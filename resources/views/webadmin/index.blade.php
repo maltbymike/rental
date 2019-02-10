@@ -1,23 +1,25 @@
-@extends('layouts.app')
+@extends('layouts.card')
 
-@section('content')
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">Dashboard</div>
+@section('title', 'Administration Panel')
 
-                <div class="card-body">
-                    @if (session('status'))
-                        <div class="alert alert-success" role="alert">
-                            {{ session('status') }}
-                        </div>
-                    @endif
+@section('heading', 'Administration Dashboard')
 
-                    You are logged in!
-                </div>
-            </div>
+@section('card-content')
+
+  @include('partials.errors')
+
+  <div class="card">
+      <div class="card-header">Inventory Tools</div>
+      <div class="card-body">
+        <div class="row">
+          <div class="text-center col-sm-3">
+            <a href="/product/category/">
+              <img src="{{ asset('img/icons/Tools.png') }}">
+              <div>Product Categories</div>
+            </a>
+          </div>
         </div>
-    </div>
-</div>
+      </div>
+  </div>
+
 @endsection
