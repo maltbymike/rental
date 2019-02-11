@@ -52,7 +52,7 @@ class ProductCategoryController extends Controller
 
     public function edit(ProductCategory $category)
     {
-        $categories = ProductCategory::all();
+        $categories = ProductCategory::where('inactive', 0)->get();
         return view('product.category.edit', compact('categories', 'category'));
     }
 
