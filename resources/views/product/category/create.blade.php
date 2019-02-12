@@ -49,6 +49,7 @@
       <label for="inactive" class="col-sm-2 form-check-label {{ $errors->has('inactive') ? 'text-danger' : '' }}">Category is Inactive:</label>
       <div class="col-sm-10">
         <div class="form-check">
+          <input type="hidden" name="inactive" id="inactiveHidden" value="0" />
           <input type="checkbox" class="form-check-input" name="inactive" id="inactive" {{ old("inactive") == TRUE ? "checked" : "" }} />
         </div>
       </div>
