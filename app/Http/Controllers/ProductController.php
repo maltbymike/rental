@@ -42,7 +42,12 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        dd($request);
+        $attributes = $this->validateProduct();
+        $product = Product::create($attributes);
+
+        session()->flash('status', "Prodct: {$attributes['name']} was created successfully!");
+        return redirect('/product');
     }
 
     /**
