@@ -3,10 +3,16 @@
 namespace App\Http\Controllers;
 
 use App\Product;
+use App\ProductCategory;
 use Illuminate\Http\Request;
 
 class ProductController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth')->except(['index', 'show']);
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -24,7 +30,8 @@ class ProductController extends Controller
      */
     public function create()
     {
-        //
+        $categories = ProductCategory::pluck('name', 'id');
+        return view('product.create', compact('categories'));
     }
 
     /**

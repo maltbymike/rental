@@ -19,4 +19,5 @@ Auth::routes();
 
 Route::get('/webadmin', 'WebadminController@index');
 
+Route::resource('product', 'ProductController');
 Route::resource('product/category', 'ProductCategoryController');

@@ -16,17 +16,18 @@ class CreateProductsTable extends Migration
         Schema::create('products', function (Blueprint $table) {
             $table->increments('id');
             $table->string('part_number')->nullable();
-            $table->string('key')->nullable();
             $table->unsignedInteger('por_num');
             $table->string('name');
             $table->text('description')->nullable();
-            $table->integer('quantity');
-            $table->decimal('sell_price')->nullable();
-            $table->unsignedInteger('type');
+            $table->integer('quantity')->nullable();
+            $table->char('type', 1);
+            $table->decimal('2_hour', 8, 2);
+            $table->decimal('4_hour', 8, 2);
+            $table->decimal('daily', 8, 2);
+            $table->decimal('weekly', 8, 2);
+            $table->decimal('4_Week', 8, 2);
             $table->unsignedInteger('manufacturer_id')->nullable();
             $table->string('model')->nullable();
-            $table->date('purchased_date')->nullable();
-            $table->date('sold_date')->nullable();
             $table->string('header')->nullable();
             $table->boolean('inactive')->default(true);
             $table->boolean('hide_on_website')->default(false);
