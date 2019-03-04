@@ -19,7 +19,9 @@ class CreateProductCategoriesTable extends Migration
             $table->string('name');
             $table->text('description')->nullable();
             $table->string('slug')->nullable();
+            $table->unsignedInteger('por_id')->nullable();
             $table->boolean('inactive')->default(true);
+            $table->softDeletes();
             $table->timestamps();
         });
     }

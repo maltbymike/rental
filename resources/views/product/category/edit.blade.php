@@ -41,13 +41,9 @@
       <div class="col-sm-10">
         <select class="form-control {{ $errors->has('parent_id') ? 'is-invalid' : '' }}" id="parent_id" name="parent_id">
           <option value="">Root Category</option>
-          @foreach ($categories as $categories_single)
-            @if($categories_single->parent_id == NULL)
-              @include('product.category.categories_select_option', [
-                'level' => 0,
-                'category' => $category
-              ])
-            @endif
+          @foreach ($categories as $category)
+            <?php $category_level = 0; ?>
+            @include('product.category.category_select_option')
           @endforeach
         </select>
       </div>

@@ -30,7 +30,8 @@ class ProductCategoryController extends Controller
 
     public function create()
     {
-        $categories = ProductCategory::pluck('name', 'id');
+        $categories = $this->getCategoryDataForSelectOption();
+
         return view('product.category.create', compact('categories'));
     }
 
@@ -52,7 +53,8 @@ class ProductCategoryController extends Controller
 
     public function edit(ProductCategory $category)
     {
-        $categories = ProductCategory::where('inactive', 0)->get();
+        $categories = $this->getCategoryDataForSelectOption();
+
         return view('product.category.edit', compact('categories', 'category'));
     }
 
@@ -61,7 +63,7 @@ class ProductCategoryController extends Controller
         $attributes = $this->validateCategory();
         $category->update($attributes);
 
-        session()->flash('status', "Category: <b>{$attributes['name']}</b> was updated!");
+        session()->flash('status', "Category: {$attributes['name']} was updated!");
         return redirect('/product/category');
     }
 
@@ -79,11 +81,21 @@ class ProductCategoryController extends Controller
         'description' => ['min:3', 'string', 'nullable'],
         'parent_id' => ['exists:product_categories,id', 'nullable'],
         'slug' => ['string', 'nullable'],
+        'por_id' => ['integer', 'nullable'],
         'inactive' => ['boolean']
       ]);
 
       $attributes['slug'] = $attributes['slug'] ?: str_slug($attributes['name']);
 
       return $attributes;
+    }
+
+    public function getCategoryDataForSelectOption()
+    {
+      $categories = ProductCategory::where('parent_id', null)->with(['children' => function ($query) {
+        $query->select('name', 'id', 'parent_id');
+      }])->select('name', 'id', 'parent_id')->get();
+
+      return $categories;
     }
 }

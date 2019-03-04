@@ -30,7 +30,8 @@ class ProductController extends Controller
      */
     public function create()
     {
-        $categories = ProductCategory::pluck('name', 'id');
+        $categories = $this->getCategoryDataForSelectOption();
+
         return view('product.create', compact('categories'));
     }
 
@@ -94,4 +95,15 @@ class ProductController extends Controller
     {
         //
     }
+
+
+    public function getCategoryDataForSelectOption()
+    {
+      $categories = ProductCategory::where('parent_id', null)->with(['children' => function ($query) {
+        $query->select('name', 'id', 'parent_id');
+      }])->select('name', 'id', 'parent_id')->get();
+
+      return $categories;
+    }
+
 }

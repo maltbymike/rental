@@ -17,4 +17,9 @@ class Product extends Model
   {
     return $this->belongsTo(ProductManufacturer::class, 'manufacturer_id');
   }
+
+  public function rates()
+  {
+    return $this->hasMany(ProductRate::class, 'product_id');
+  }
 }

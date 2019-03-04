@@ -34,9 +34,9 @@
     </div>
 
     <div class="form-group row">
-      <label for="por_num" class="col-sm-2 form-control-label {{ $errors->has('por_num') ? 'text-danger' : '' }}">POR Product Number:</label>
+      <label for="por_id" class="col-sm-2 form-control-label {{ $errors->has('por_id') ? 'text-danger' : '' }}">POR Product Number:</label>
       <div class="col-sm-4">
-        <input type="text" class="form-control {{ $errors->has('por_num') ? 'is-invalid' : '' }}" id="por_num" name="por_num" value="{{ old('por_num') }}">
+        <input type="text" class="form-control {{ $errors->has('por_id') ? 'is-invalid' : '' }}" id="por_id" name="por_id" value="{{ old('por_id') }}">
       </div>
     </div>
 
@@ -55,47 +55,36 @@
     </div>
 
     <div class="form-group row">
-      <div class="col-sm-2 form-control-label">
-        Rates:
+      <div class="col-md-2 form-control-label">
+        <h4>Rates:</h4>
       </div>
-      <div class="col-sm-2">
-        <div class="text-center">
-          <label for="2_hour" class="form-control-label {{ $errors->has('2_hour') ? 'text-danger' : '' }}">2 Hour:</label>
+
+      <div class="row col-md-6">
+        <div class="text-center col-6 form-control-label">Period:</div>
+        <div class="text-center col-6 form-control-label">Rate:</div>
+      </div>
+
+      @for ($i = 0; $i <= 4; $i++)
+        <div class="w-100"></div>
+        <div class="form-group row offset-md-2 col-md-6">
+          <input type="text" class="form-control col-3 {{ $errors->has('time[$i]') ? 'is-invalid' : '' }}" id="time[{{$i}}]" name="time[{{$i}}]" value="{{ old('time[$i]') }}">
+          <select class="form-control col-3 {{ $errors->has('period[$i]') ? 'is-invalid' : '' }}" id="period[{{$i}}]" name="period[{{$i}}]">
+            <option value="1" {{ old("period[$i]") == "1" ? "selected" : "" }}>Hour(s)</option>
+            <option value="168" {{ old("period[$i]") == "168" ? "selected" : "" }}>Day(s)</option>
+            <option value="672" {{ old("period[$i]") == "672" ? "selected" : "" }}>Week(s)</option>
+          </select>
+          <input type="text" class="form-control col-6 {{ $errors->has('rate[$i]') ? 'is-invalid' : '' }}" id="rate[{{$i}}]" name="rate[{{$i}}]" value="{{ old('rate[$i]') }}">
         </div>
-        <input type="text" class="form-control {{ $errors->has('2_hour') ? 'is-invalid' : '' }}" id="2_hour" name="2_hour" value="{{ old('2_hour') }}">
-      </div>
-      <div class="col-sm-2">
-        <div class="text-center">
-          <label for="4_hour" class="form-control-label {{ $errors->has('4_hour') ? 'text-danger' : '' }}">4 Hour:</label>
-        </div>
-        <input type="text" class="form-control {{ $errors->has('4_hour') ? 'is-invalid' : '' }}" id="4_hour" name="4_hour" value="{{ old('4_hour') }}">
-      </div>
-      <div class="col-sm-2">
-        <div class="text-center">
-          <label for="daily" class="form-control-label {{ $errors->has('daily') ? 'text-danger' : '' }}">Daily:</label>
-        </div>
-        <input type="text" class="form-control {{ $errors->has('daily') ? 'is-invalid' : '' }}" id="daily" name="daily" value="{{ old('daily') }}">
-      </div>
-      <div class="col-sm-2">
-        <div class="text-center">
-          <label for="weekly" class="form-control-label {{ $errors->has('weekly') ? 'text-danger' : '' }}">Weekly:</label>
-        </div>
-        <input type="text" class="form-control {{ $errors->has('weekly') ? 'is-invalid' : '' }}" id="weekly" name="weekly" value="{{ old('weekly') }}">
-      </div>
-      <div class="col-sm-2">
-        <div class="text-center">
-          <label for="4_week" class="form-control-label {{ $errors->has('4_week') ? 'text-danger' : '' }}">4 Week:</label>
-        </div>
-        <input type="text" class="form-control {{ $errors->has('4_week') ? 'is-invalid' : '' }}" id="4_week" name="4_week" value="{{ old('4_week') }}">
-      </div>
+      @endfor
     </div>
 
     <div class="form-group row">
       <label for="categories" class="col-sm-2 form-control-label {{ $errors->has('categories') ? 'text-danger' : '' }}">Categories:</label>
       <div class="col-sm-10">
         <select multiple class="form-control {{ $errors->has('categories') ? 'is-invalid' : '' }}" id="categories" name="categories" size="10">
-          @foreach ($categories as $id => $name)
-            <option value="{{ $id }}" {{ old("categories") == $id ? "selected" : "" }}>{{ $name }}</option>
+          @foreach ($categories as $category)
+            <?php $category_level = 0; ?>
+            @include('product.category.category_select_option')
           @endforeach
         </select>
       </div>
