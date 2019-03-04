@@ -15,8 +15,9 @@ class CreateProductsTable extends Migration
     {
         Schema::create('products', function (Blueprint $table) {
             $table->increments('id');
+            $table->string('product_key');
             $table->string('part_number')->nullable();
-            $table->unsignedInteger('por_id');
+            $table->unsignedInteger('por_id')->nullable();
             $table->string('name');
             $table->text('description')->nullable();
             $table->integer('quantity')->nullable();
@@ -26,7 +27,7 @@ class CreateProductsTable extends Migration
             $table->string('header')->nullable();
             $table->boolean('inactive')->default(true);
             $table->boolean('hide_on_website')->default(false);
-            $table->decimal('weight', 8, 2);
+            $table->decimal('weight', 8, 2)->nullable();
             $table->string('slug')->nullable();
             $table->timestamps();
             $table->softDeletes();

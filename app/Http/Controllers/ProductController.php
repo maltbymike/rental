@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Product;
 use App\ProductCategory;
+use App\ProductType;
+use App\ProductManufacturer;
+
 use Illuminate\Http\Request;
 
 class ProductController extends Controller
@@ -31,8 +34,9 @@ class ProductController extends Controller
     public function create()
     {
         $categories = $this->getCategoryDataForSelectOption();
+        $types = ProductType::select('type_code', 'name')->orderby('name')->get()->toArray();
 
-        return view('product.create', compact('categories'));
+        return view('product.create', compact('categories', 'types'));
     }
 
     /**
@@ -43,9 +47,11 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
-        dd($request);
+        // dd($request);
         $attributes = $this->validateProduct();
         $product = Product::create($attributes);
+
+        dd($attributes);
 
         session()->flash('status', "Prodct: {$attributes['name']} was created successfully!");
         return redirect('/product');
@@ -96,6 +102,36 @@ class ProductController extends Controller
         //
     }
 
+    public function validateProduct()
+    {
+      $attributes = request()->validate([
+        'type' => ['required', 'size:1'],
+        'name' => ['required', 'min:3', 'max:255', 'string'],
+        'description' => ['min:3', 'string', 'nullable'],
+        'product_key' => ['required', 'string'],
+        'part_number' => ['string', 'nullable'],
+        'por_id' => ['integer', 'nullable'],
+        'header' => ['string', 'nullable'],
+        'quantity' => ['numeric', 'nullable'],
+        // 'rates.*.time' => ['numeric', 'required_with:rates.*.rate', 'nullable'],
+        // 'rates.*.period' => ['required_with:rates.*.time', 'numeric'],
+        // 'rates.*.rate' => ['numeric', 'required_with:rates.*.time', 'nullable'],
+        'slug' => ['string', 'nullable'],
+        'manufacturer' => ['string', 'nullable'],
+        'model' => ['string', 'nullable'],
+        'inactive' => ['boolean'],
+        'hide_on_website' => ['boolean']
+      ]);
+
+      $attributes['slug'] = $attributes['slug'] ?: str_slug($attributes['name']);
+
+      $manufacturer = ProductManufacturer::firstOrCreate(['name' => $attributes['manufacturer']]);
+      $attributes['manufacturer_id'] = $manufacturer->id;
+      unset($attributes['manufacturer']);
+
+      return $attributes;
+
+    }
 
     public function getCategoryDataForSelectOption()
     {
