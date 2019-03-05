@@ -85,22 +85,22 @@
       @for ($i = 0; $i <= 4; $i++)
         <div class="w-100"></div>
         <div class="form-group row offset-md-2 col-md-6">
-          <input type="number" class="form-control col-3 {{ $errors->has('rates[$i][time]') ? 'is-invalid' : '' }}" id="rates[{{$i}}][time]" name="rates[{{$i}}][time]" value="{{ old('rates[$i][time]') }}">
-          <select class="form-control col-3 {{ $errors->has('rates[$i][period]') ? 'is-invalid' : '' }}" id="rates[{{$i}}][period]" name="rates[{{$i}}][period]">
-            <option value="1" {{ old("rates[$i][period]") == "1" ? "selected" : "" }}>Hour(s)</option>
-            <option value="168" {{ old("rates[$i][period]") == "168" ? "selected" : "" }}>Day(s)</option>
-            <option value="672" {{ old("rates[$i][period]") == "672" ? "selected" : "" }}>Week(s)</option>
+          <input type="number" class="form-control col-3 {{ $errors->has('rates.' . $i . '.time') ? 'is-invalid' : '' }}" id="rates[{{$i}}][time]" name="rates[{{$i}}][time]" value="{{ old('rates.' . $i . '.time') }}">
+          <select class="form-control col-3 {{ $errors->has('rates.' . $i . '.period') ? 'is-invalid' : '' }}" id="rates[{{$i}}][period]" name="rates[{{$i}}][period]">
+            <option value="1" {{ old("rates.$i.period") == "1" ? "selected" : "" }}>Hour(s)</option>
+            <option value="{{ env('DAY_HOURS', 24 ) }}" {{ old("rates.$i.period") == env('DAY_HOURS', 24) ? "selected" : "" }}>Day(s)</option>
+            <option value="{{ env('WEEK_HOURS', 168) }}" {{ old("rates.$i.period") == env('WEEK_HOURS', 168) ? "selected" : "" }}>Week(s)</option>
           </select>
-          <input type="number" class="form-control col-6 {{ $errors->has('rates[$i][rate]') ? 'is-invalid' : '' }}" id="rates[{{$i}}][rate]" name="rates[{{$i}}][rate]" value="{{ old('rates[$i][rate]') }}">
+          <input type="number" class="form-control col-6 {{ $errors->has('rates.' . $i . '.rate') ? 'is-invalid' : '' }}" id="rates[{{$i}}][rate]" name="rates[{{$i}}][rate]" value="{{ old('rates.' . $i . '.rate') }}">
         </div>
       @endfor
     </div>
 
     <div class="form-group row">
-      <label for="categories" class="col-sm-2 form-control-label {{ $errors->has('categories') ? 'text-danger' : '' }}">Categories:</label>
+      <label for="categories[]" class="col-sm-2 form-control-label {{ $errors->has('categories') ? 'text-danger' : '' }}">Categories:</label>
       <div class="col-sm-10">
-        <select multiple class="form-control {{ $errors->has('categories') ? 'is-invalid' : '' }}" id="categories" name="categories" size="10">
-          @foreach ($categories as $category)
+        <select multiple class="form-control {{ $errors->has('categories') ? 'is-invalid' : '' }}" id="categories[]" name="categories[]" size="10">
+            @foreach ($categories as $category)
             <?php $category_level = 0; ?>
             @include('product.category.category_select_option')
           @endforeach
