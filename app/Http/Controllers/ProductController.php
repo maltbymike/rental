@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\ProductRequest;
+
 use App\Product;
 use App\ProductCategory;
 use App\ProductType;
@@ -47,35 +49,39 @@ class ProductController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(ProductRequest $request)
     {
         DB::transaction(function()
         {
-          $attributes = $this->validateProduct();
-          $attributes['slug'] = $attributes['slug'] ?: str_slug($attributes['name']);
-          $attributes['manufacturer_id'] = $this->getOrAddManufacturer($attributes['manufacturer']);
-          unset($attributes['manufacturer']);
 
-          $rates = $this->validateRates();
+         // Create Product
+          $product = Product::create($this->getProductAttributes());
 
-          $product = Product::create($attributes);
-
-          foreach ($rates as $rate)
+          // Get manufacturer_id and unset manufacturer
+          if (request()->manufacturer)
           {
-            foreach ($rate as $line)
-            {
-              if (!empty($line['time']))
-              {
-                $product_rate = new ProductRate;
-                $product_rate->product_id = $product->id;
-                $product_rate->hours = $line['time'] * $line['period'];
-                $product_rate->rate = $line['rate'];
-                $product_rate->save();
-              }
-            }
+            $manufacturer = ProductManufacturer::firstOrCreate(['name' => request()->manufacturer]);
+            $product->manufacturer()->associate($manufacturer);
+            $product->save();
           }
 
-        session()->flash('status', "Prodct: {$attributes['name']} was created successfully!");
+          // create rates
+          foreach (request()->rates as $rate)
+          {
+            if (!empty($rate['time']))
+            {
+              $product_rate[] = new ProductRate ([
+                'hours' => $rate['time'] * $rate['period'],
+                'rate' => $rate['rate']
+              ]);
+            }
+            $product->rates()->saveMany($product_rate);
+          }
+
+          // create product_category map
+          $product->categories()->attach(request()->input('categories'));
+
+        session()->flash('status', "Product: $product->name was created successfully!");
         });
 
         return redirect('/product');
@@ -134,31 +140,34 @@ class ProductController extends Controller
 
       return $categories;
     }
+    //
+    // public function validateCategories()
+    // {
+    //   $categories = request()->validate([
+    //     'categories.*' => ['integer', 'exists:product_categories,id']
+    //   ]);
+    //
+    //   return $categories;
+    // }
 
-    public function getOrAddManufacturer($name)
+    public function getProductAttributes()
     {
-      $manufacturer = ProductManufacturer::firstOrCreate(['name' => $name]);
+      $attributes = [
+        'type' => request('type'),
+        'name' => request('name'),
+        'description' => request('description'),
+        'product_key' => request('product_key'),
+        'part_number' => request('part_number'),
+        'por_id' => request('por_id'),
+        'header' => request('header'),
+        'quantity' => request('quantity'),
+        'slug' => request('slug'),
+        'model' => request('model'),
+        'inactive' => request('inactive'),
+        'hide_on_website' => request('hide_on_website')
+      ];
 
-      return $manufacturer->id;
-    }
-
-    public function validateProduct()
-    {
-      $attributes = request()->validate([
-        'type' => ['required', 'size:1'],
-        'name' => ['required', 'min:3', 'max:255', 'string'],
-        'description' => ['min:3', 'string', 'nullable'],
-        'product_key' => ['required', 'unique:products', 'string'],
-        'part_number' => ['string', 'nullable'],
-        'por_id' => ['integer', 'unique:products', 'nullable'],
-        'header' => ['string', 'nullable'],
-        'quantity' => ['numeric', 'nullable'],
-        'slug' => ['string', 'unique:products', 'nullable'],
-        'manufacturer' => ['string', 'nullable'],
-        'model' => ['string', 'nullable'],
-        'inactive' => ['boolean'],
-        'hide_on_website' => ['boolean']
-      ]);
+      $attributes['slug'] = $attributes['slug'] ?: str_slug($attributes['name']);
 
       return $attributes;
 

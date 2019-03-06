@@ -5,6 +5,7 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Product;
+use App\ProductCategory;
 
 class Product extends Model
 {
@@ -21,5 +22,10 @@ class Product extends Model
   public function rates()
   {
     return $this->hasMany(ProductRate::class, 'product_id');
+  }
+
+  public function categories()
+  {
+    return $this->belongsToMany(ProductCategory::class)->withTimestamps();
   }
 }
