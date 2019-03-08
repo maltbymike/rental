@@ -140,15 +140,6 @@ class ProductController extends Controller
 
       return $categories;
     }
-    //
-    // public function validateCategories()
-    // {
-    //   $categories = request()->validate([
-    //     'categories.*' => ['integer', 'exists:product_categories,id']
-    //   ]);
-    //
-    //   return $categories;
-    // }
 
     public function getProductAttributes()
     {

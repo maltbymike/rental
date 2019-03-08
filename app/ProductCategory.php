@@ -14,6 +14,11 @@ class ProductCategory extends Model
     protected $dates = ['deleted_at'];
     protected $guarded = [];
 
+    public function getRouteKeyName()
+    {
+      return 'slug';
+    }
+
     public function parent()
     {
       return $this->belongsTo(ProductCategory::class, 'parent_id');
@@ -31,6 +36,12 @@ class ProductCategory extends Model
 
     public function products()
     {
-      return $this->belongsToMany(Product::class)->withTimestamps();
+      return $this->belongsToMany(Product::class)->with('rates')->withTimestamps();
     }
+
+    public function productsWithRates()
+    {
+      return $this->belongsToMany(Product::class)->with('rates')->withTimestamps();
+    }
+
 }

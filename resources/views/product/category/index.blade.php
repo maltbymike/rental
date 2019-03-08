@@ -4,6 +4,8 @@
 
 @section('heading', 'Product Categories')
 
+@section('breadcrumbs', Breadcrumbs::render('categories'))
+
 @section('card-content')
 
   @include('partials.errors')

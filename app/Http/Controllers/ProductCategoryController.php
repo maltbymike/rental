@@ -48,7 +48,10 @@ class ProductCategoryController extends Controller
     {
         $loggedIn = Auth::check();
 
-        return view('product.category.show', compact('category', 'loggedIn'));
+        $subcategories = $category->children()->with('products')->orderBy('name')->get();
+        $products = $category->productsWithRates()->orderBy('name')->get();
+
+        return view('product.category.show', compact('category', 'subcategories', 'products', 'loggedIn'));
     }
 
     public function edit(ProductCategory $category)

@@ -1,5 +1,5 @@
 <div class="d-flex justify-content-between align-items-center">
-  <a href="/product/category/{{ $category->id }}" class="list-group-item list-group-item-action {{ $category->inactive ? 'list-group-item-danger' : 'list-group-item-light' }}">
+  <a href="/product/category/{{ $category->slug }}" class="list-group-item list-group-item-action {{ $category->inactive ? 'list-group-item-danger' : 'list-group-item-light' }}">
     @if ($category->inactive)
       <del>{{ $category->name }}</del>
     @else
@@ -8,7 +8,7 @@
   </a>
 
   @if ($loggedIn)
-    <a href="/product/category/{{ $category->id }}/edit" class="btn btn-primary btn-sm">EDIT</a>
+    <a href="/product/category/{{ $category->slug }}/edit" class="btn btn-primary btn-sm">EDIT</a>
   @endif
 
 </div>

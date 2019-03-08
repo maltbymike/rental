@@ -21,7 +21,7 @@ class Product extends Model
 
   public function rates()
   {
-    return $this->hasMany(ProductRate::class, 'product_id');
+    return $this->hasMany(ProductRate::class, 'product_id')->orderBy('hours');
   }
 
   public function categories()
