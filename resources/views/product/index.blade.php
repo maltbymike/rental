@@ -24,7 +24,7 @@
           @if ($loggedIn)
             <a href="/product/{{ $product->slug }}/edit" class="btn btn-primary btn-sm">EDIT</a>
           @endif
-        
+
         </div>
       </div>
     @endforeach

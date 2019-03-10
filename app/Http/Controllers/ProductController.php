@@ -106,7 +106,9 @@ class ProductController extends Controller
      */
     public function show(Product $product)
     {
-        //
+      $loggedIn = Auth::check();
+
+      return view('product.show', compact('product', 'loggedIn'));
     }
 
     /**

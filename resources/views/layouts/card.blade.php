@@ -6,7 +6,7 @@
     <div class="row justify-content-center">
         <div class="col-md-12">
             <div class="card">
-                <div class="card-header">@yield('heading')</div>
+                <div class="card-header text-white bg-dark">@yield('heading')</div>
 
                 <div class="card-body">
                     @if (session('status'))

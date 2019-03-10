@@ -14,6 +14,11 @@ class Product extends Model
 
   protected $guarded = [];
 
+  public function getRouteKeyName()
+  {
+    return 'slug';
+  }
+
   public function manufacturer()
   {
     return $this->belongsTo(ProductManufacturer::class, 'manufacturer_id');
