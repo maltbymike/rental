@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\ProductRequest;
+use Illuminate\Support\Facades\Auth;
 
 use App\Product;
 use App\ProductCategory;
@@ -27,7 +28,17 @@ class ProductController extends Controller
      */
     public function index()
     {
-        //
+      if ($loggedIn = Auth::check())
+      {
+        $products = Product::all();
+      }
+      else
+      {
+        $products = Product::where('inactive', 0)->get();
+      }
+
+      return view('product.index', compact('products', 'loggedIn'));
+
     }
 
     /**
