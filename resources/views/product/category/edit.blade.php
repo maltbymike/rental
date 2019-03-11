@@ -6,7 +6,7 @@
   <div class="d-flex justify-content-between align-items-center">
     <span>Edit Product Category</span>
 
-    <form method="post" action ="/product/category/{{ $category->id }}">
+    <form method="post" action ="/product/category/{{ $category->slug }}">
       @CSRF
       @method('delete')
       <button type="submit" class="btn btn-danger btn-sm">DELETE</button>
@@ -18,7 +18,7 @@
 
   @include('partials.errors')
 
-  <form method="post" action="/product/category/{{ $category->id }}">
+  <form method="post" action="/product/category/{{ $category->slug }}">
     @method('PATCH')
     @CSRF
 

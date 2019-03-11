@@ -119,7 +119,10 @@ class ProductController extends Controller
      */
     public function edit(Product $product)
     {
-        //
+      $categories = $this->getCategoryDataForSelectOption();
+      $types = ProductType::select('type_code', 'name')->orderby('name')->get()->toArray();
+
+      return view('product.edit', compact('product', 'categories', 'types'));
     }
 
     /**
@@ -129,9 +132,48 @@ class ProductController extends Controller
      * @param  \App\Product  $product
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Product $product)
+    public function update(ProductRequest $request, Product $product)
     {
-        //
+      DB::transaction(function() use ($product)
+      {
+
+        // Create Product
+        $product->update($this->getProductAttributes());
+
+        // Get manufacturer_id and unset manufacturer
+        if (request()->manufacturer)
+        {
+          $manufacturer = ProductManufacturer::firstOrCreate(['name' => request()->manufacturer]);
+          $product->manufacturer()->associate($manufacturer);
+          $product->save();
+        }
+
+        // create rates
+        foreach (request()->rates as $rate)
+        {
+          if (!empty($rate['time']))
+          {
+            $data = [
+              'hours' => $rate['time'] * $rate['period'],
+              'rate' => $rate['rate']
+            ];
+
+            $updateRate = $product->rates()->where('hours', $data['hours'])->first() ?: new ProductRate($data);
+
+            $updateRate->hours = $data['hours'];
+            $updateRate->rate = $data['rate'];
+
+            $product->rates()->save($updateRate);
+          }
+        }
+
+        // create product_category map
+        $product->categories()->sync(request()->input('categories'));
+
+      session()->flash('status', "Product: $product->name was updated successfully!");
+      });
+
+      return redirect("/product/" . $product->slug);
     }
 
     /**
