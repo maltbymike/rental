@@ -22,12 +22,15 @@
 </head>
 <body>
     <div id="app">
+      <div class="container-fluid">
 
         @include('layouts.partials.top-navbar')
 
         <main class="py-4">
             @yield('content')
         </main>
+        
+      </div>
     </div>
 </body>
 </html>

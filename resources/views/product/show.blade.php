@@ -28,14 +28,14 @@
 
   <div class="row">
 
-    <div class="col-sm-6 col-lg-4">
+    <div class="col-sm-6 col-lg-4 mb-4">
       <div class="card">
         <img class="card-img-top" src="https://via.placeholder.com/350x400" alt="Image of {{ $product->name }}" />
       </div>
     </div>
 
-    <div class="col-sm-6 col-lg-3 order-lg-12">
-      <table class="table">
+    <div class="col-sm-6 col-lg-3 order-lg-12 mb-4">
+      <table class="table table-hover">
         <thead class="thead-dark">
           <tr>
             <th scope="rowgroup" colspan="2">Rental Rates</th>
@@ -43,16 +43,16 @@
         </thead>
         <tbody>
           <tr>
-            <th scope="row" class="col-6">4 Hours</th>
-            <td class="col-6">{{ $product->rates->firstWhere('hours', ">=", env('4_HOURS')) ? $product->rates->firstWhere('hours', ">=", env('4_HOURS'))->rate : "---" }}</td>
+            <th scope="row" style="width: 50%">4 Hours</th>
+            <td class="text-right" style="width: 50%">{{ $product->rates->firstWhere('hours', ">=", env('4_HOURS')) ? $product->rates->firstWhere('hours', ">=", env('4_HOURS'))->rate : "---" }}</td>
           </tr>
           <tr>
             <th scope="row">Daily</td>
-            <td>{{ $product->rates->firstWhere('hours', ">=", env('DAY_HOURS')) ? $product->rates->firstWhere('hours', ">=", env('DAY_HOURS'))->rate : "---" }}</td>
+            <td class="text-right">{{ $product->rates->firstWhere('hours', ">=", env('DAY_HOURS')) ? $product->rates->firstWhere('hours', ">=", env('DAY_HOURS'))->rate : "---" }}</td>
           </tr>
           <tr>
             <th scope="row">Weekly</td>
-            <td>{{ $product->rates->firstWhere('hours', ">=", env('WEEK_HOURS')) ? $product->rates->firstWhere('hours', ">=", env('WEEK_HOURS'))->rate : "---" }}</td>
+            <td class="text-right">{{ $product->rates->firstWhere('hours', ">=", env('WEEK_HOURS')) ? $product->rates->firstWhere('hours', ">=", env('WEEK_HOURS'))->rate : "---" }}</td>
           </tr>
         </tbody>
         <thead class="thead-light">
@@ -63,7 +63,7 @@
         <tbody>
           <tr>
             <th scope="row">Out Friday after 4pm</td>
-            <td>
+            <td class="text-right">
               @if ($product->rates->where('hours', env('DAY_HOURS'))->first())
               {{ number_format($product->rates->where('hours', env('DAY_HOURS'))->first()->rate * 1.5, 2) }}
               @elseif ($product->rates->firstWhere('hours', ">=", env('WEEK_HOURS')))
@@ -75,50 +75,29 @@
           </tr>
           <tr>
             <th scope="row">Out Saturday</td>
-            <td>{{ $product->rates->firstWhere('hours', ">=", env('DAY_HOURS')) ? $product->rates->firstWhere('hours', ">=", env('DAY_HOURS'))->rate : "---" }}</td>
+            <td class="text-right">{{ $product->rates->firstWhere('hours', ">=", env('DAY_HOURS')) ? $product->rates->firstWhere('hours', ">=", env('DAY_HOURS'))->rate : "---" }}</td>
           </tr>
         </tbody>
       </table>
     </div>
 
-    <div class="col-12 col-lg-5">
-      as;dlkfnasd;flkansd;lknas;lgnajkgbakjlsbgklajsbkjasbdfkjabsdfkjba;sdfna;lsndfla;ksndflanksd;fl
-      as;dlkfnasd;flkansd;lknas;lgnajkgbakjlsbgklajsbkjasbdfkjabsdfkjba;sdfna;lsndfla;ksndflanksd;fl
-      as;dlkfnasd;flkansd;lknas;lgnajkgbakjlsbgklajsbkjasbdfkjabsdfkjba;sdfna;lsndfla;ksndflanksd;fl
-      as;dlkfnasd;flkansd;lknas;lgnajkgbakjlsbgklajsbkjasbdfkjabsdfkjba;sdfna;lsndfla;ksndflanksd;fl
-      as;dlkfnasd;flkansd;lknas;lgnajkgbakjlsbgklajsbkjasbdfkjabsdfkjba;sdfna;lsndfla;ksndflanksd;fl
-      as;dlkfnasd;flkansd;lknas;lgnajkgbakjlsbgklajsbkjasbdfkjabsdfkjba;sdfna;lsndfla;ksndflanksd;fl
-      as;dlkfnasd;flkansd;lknas;lgnajkgbakjlsbgklajsbkjasbdfkjabsdfkjba;sdfna;lsndfla;ksndflanksd;fl
-      as;dlkfnasd;flkansd;lknas;lgnajkgbakjlsbgklajsbkjasbdfkjabsdfkjba;sdfna;lsndfla;ksndflanksd;fl
-      as;dlkfnasd;flkansd;lknas;lgnajkgbakjlsbgklajsbkjasbdfkjabsdfkjba;sdfna;lsndfla;ksndflanksd;fl
-      as;dlkfnasd;flkansd;lknas;lgnajkgbakjlsbgklajsbkjasbdfkjabsdfkjba;sdfna;lsndfla;ksndflanksd;fl
-      as;dlkfnasd;flkansd;lknas;lgnajkgbakjlsbgklajsbkjasbdfkjabsdfkjba;sdfna;lsndfla;ksndflanksd;fl
-      as;dlkfnasd;flkansd;lknas;lgnajkgbakjlsbgklajsbkjasbdfkjabsdfkjba;sdfna;lsndfla;ksndflanksd;fl
-      as;dlkfnasd;flkansd;lknas;lgnajkgbakjlsbgklajsbkjasbdfkjabsdfkjba;sdfna;lsndfla;ksndflanksd;fl
-      as;dlkfnasd;flkansd;lknas;lgnajkgbakjlsbgklajsbkjasbdfkjabsdfkjba;sdfna;lsndfla;ksndflanksd;fl
-      as;dlkfnasd;flkansd;lknas;lgnajkgbakjlsbgklajsbkjasbdfkjabsdfkjba;sdfna;lsndfla;ksndflanksd;fl
-      as;dlkfnasd;flkansd;lknas;lgnajkgbakjlsbgklajsbkjasbdfkjabsdfkjba;sdfna;lsndfla;ksndflanksd;fl
-      as;dlkfnasd;flkansd;lknas;lgnajkgbakjlsbgklajsbkjasbdfkjabsdfkjba;sdfna;lsndfla;ksndflanksd;fl
-      as;dlkfnasd;flkansd;lknas;lgnajkgbakjlsbgklajsbkjasbdfkjabsdfkjba;sdfna;lsndfla;ksndflanksd;fl
-      as;dlkfnasd;flkansd;lknas;lgnajkgbakjlsbgklajsbkjasbdfkjabsdfkjba;sdfna;lsndfla;ksndflanksd;fl
-      as;dlkfnasd;flkansd;lknas;lgnajkgbakjlsbgklajsbkjasbdfkjabsdfkjba;sdfna;lsndfla;ksndflanksd;fl
-      as;dlkfnasd;flkansd;lknas;lgnajkgbakjlsbgklajsbkjasbdfkjabsdfkjba;sdfna;lsndfla;ksndflanksd;fl
-      as;dlkfnasd;flkansd;lknas;lgnajkgbakjlsbgklajsbkjasbdfkjabsdfkjba;sdfna;lsndfla;ksndflanksd;fl
-      as;dlkfnasd;flkansd;lknas;lgnajkgbakjlsbgklajsbkjasbdfkjabsdfkjba;sdfna;lsndfla;ksndflanksd;fl
-      as;dlkfnasd;flkansd;lknas;lgnajkgbakjlsbgklajsbkjasbdfkjabsdfkjba;sdfna;lsndfla;ksndflanksd;fl
-      as;dlkfnasd;flkansd;lknas;lgnajkgbakjlsbgklajsbkjasbdfkjabsdfkjba;sdfna;lsndfla;ksndflanksd;fl
-      as;dlkfnasd;flkansd;lknas;lgnajkgbakjlsbgklajsbkjasbdfkjabsdfkjba;sdfna;lsndfla;ksndflanksd;fl
-      as;dlkfnasd;flkansd;lknas;lgnajkgbakjlsbgklajsbkjasbdfkjabsdfkjba;sdfna;lsndfla;ksndflanksd;fl
-      as;dlkfnasd;flkansd;lknas;lgnajkgbakjlsbgklajsbkjasbdfkjabsdfkjba;sdfna;lsndfla;ksndflanksd;fl
-      as;dlkfnasd;flkansd;lknas;lgnajkgbakjlsbgklajsbkjasbdfkjabsdfkjba;sdfna;lsndfla;ksndflanksd;fl
-      as;dlkfnasd;flkansd;lknas;lgnajkgbakjlsbgklajsbkjasbdfkjabsdfkjba;sdfna;lsndfla;ksndflanksd;fl
-      as;dlkfnasd;flkansd;lknas;lgnajkgbakjlsbgklajsbkjasbdfkjabsdfkjba;sdfna;lsndfla;ksndflanksd;fl
-      as;dlkfnasd;flkansd;lknas;lgnajkgbakjlsbgklajsbkjasbdfkjabsdfkjba;sdfna;lsndfla;ksndflanksd;fl
-      as;dlkfnasd;flkansd;lknas;lgnajkgbakjlsbgklajsbkjasbdfkjabsdfkjba;sdfna;lsndfla;ksndflanksd;fl
-      as;dlkfnasd;flkansd;lknas;lgnajkgbakjlsbgklajsbkjasbdfkjabsdfkjba;sdfna;lsndfla;ksndflanksd;fl
-      as;dlkfnasd;flkansd;lknas;lgnajkgbakjlsbgklajsbkjasbdfkjabsdfkjba;sdfna;lsndfla;ksndflanksd;fl
-      as;dlkfnasd;flkansd;lknas;lgnajkgbakjlsbgklajsbkjasbdfkjabsdfkjba;sdfna;lsndfla;ksndflanksd;fl
+    <div class="col-12 col-lg-5 mb-4">
+      <h4>{{ $product->name }}</h4>
+      <p>{{ $product->description }}</p>
+      <dl class="row">
+        <dt class="col-sm-4">Product Number</dt>
+        <dd class="col-sm-8">{{ $product->part_number }}</dd>
+      </dl>
+      <dl class="row">
+        <dt class="col-sm-4">Manufacturer</dt>
+        <dd class="col-sm-8">{{ $product->manufacturer->name }}</dd>
+      </dl>
+      <dl class="row">
+        <dt class="col-sm-4">Model</dt>
+        <dd class="col-sm-8">{{ $product->model }}</dd>
+      </dl>
     </div>
+
 
   </div>
 
