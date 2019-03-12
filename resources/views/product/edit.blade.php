@@ -2,7 +2,17 @@
 
 @section('title', 'Edit Product')
 
-@section('heading', 'Edit Product')
+@section('heading')
+<div class="d-flex justify-content-between align-items-center">
+  <span>Edit Product</span>
+
+  <form method="post" action ="/product/{{ $product->slug }}">
+    @CSRF
+    @method('delete')
+    <button type="submit" class="btn btn-danger btn-sm">DELETE</button>
+  </form>
+</div>
+@endsection
 
 @section('breadcrumbs', Breadcrumbs::render('product-edit', $product))
 
