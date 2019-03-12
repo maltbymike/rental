@@ -219,16 +219,4 @@ class ProductController extends Controller
 
     }
 
-    public function validateRates()
-    {
-      $rates = request()->validate([
-        'rates.*.time' => ['numeric', 'required_with:rates.*.rate', 'nullable'],
-        'rates.*.period' => ['required_with:rates.*.time', 'numeric'],
-        'rates.*.rate' => ['numeric', 'required_with:rates.*.time', 'nullable'],
-      ]);
-
-      return $rates;
-    }
-
-
 }
