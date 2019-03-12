@@ -80,18 +80,28 @@
     <div class="col-12 col-lg-5 mb-4">
       <h4>{{ $product->name }}</h4>
       <p>{{ $product->description }}</p>
+
+      @if ($product->part_number)
       <dl class="row">
         <dt class="col-sm-4">Product Number</dt>
         <dd class="col-sm-8">{{ $product->part_number }}</dd>
       </dl>
+      @endif
+
+      @if ($product->manufacturer)
       <dl class="row">
         <dt class="col-sm-4">Manufacturer</dt>
         <dd class="col-sm-8">{{ $product->manufacturer->name }}</dd>
       </dl>
+      @endif
+
+      @if ($product->model)
       <dl class="row">
         <dt class="col-sm-4">Model</dt>
         <dd class="col-sm-8">{{ $product->model }}</dd>
       </dl>
+      @endif
+
     </div>
 
 
