@@ -20,6 +20,11 @@ Breadcrumbs::for('category', function ($trail, $category) {
   $trail->push($category->name, route('category.show', $category->slug));
 });
 
+Breadcrumbs::for('category-edit', function ($trail, $category) {
+  $trail->parent('category', $category);
+  $trail->push('Edit', route('category.edit', $category->slug));
+});
+
 // Products
 Breadcrumbs::for('products', function ($trail) {
   $trail->parent('home');

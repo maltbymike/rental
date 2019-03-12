@@ -2,6 +2,8 @@
 
 @section('title', 'Edit Product Category')
 
+@section('breadcrumbs', Breadcrumbs::render('category-edit', $category))
+
 @section('heading')
   <div class="d-flex justify-content-between align-items-center">
     <span>Edit Product Category</span>
@@ -41,7 +43,7 @@
       <div class="col-sm-10">
         <select class="form-control {{ $errors->has('parent_id') ? 'is-invalid' : '' }}" id="parent_id" name="parent_id">
           <option value="">Root Category</option>
-          @foreach ($categories as $category)
+          @foreach ($categories as $category_for_select)
             <?php $category_level = 0; ?>
             @include('product.category.category_select_option')
           @endforeach

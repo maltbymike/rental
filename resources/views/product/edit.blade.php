@@ -4,7 +4,7 @@
 
 @section('heading', 'Edit Product')
 
-@section('Breadcrumbs', Breadcrumbs::render('product-edit', $product))
+@section('breadcrumbs', Breadcrumbs::render('product-edit', $product))
 
 @section('card-content')
 
@@ -103,7 +103,7 @@
       <label for="categories[]" class="col-sm-2 form-control-label {{ $errors->has('categories') ? 'text-danger' : '' }}">Categories:</label>
       <div class="col-sm-10">
         <select multiple class="form-control {{ $errors->has('categories') ? 'is-invalid' : '' }}" id="categories[]" name="categories[]" size="10">
-            @foreach ($categories as $category)
+            @foreach ($categories as $category_for_select)
             <?php $category_level = 0; ?>
             @include('product.category.category_select_option')
           @endforeach
@@ -121,7 +121,7 @@
     <div class="form-group row">
       <label for="manufacturer" class="col-sm-2 form-control-label {{ $errors->has('manufacturer') ? 'text-danger' : '' }}">Manufacturer:</label>
       <div class="col-sm-10">
-        <input type="text" class="form-control {{ $errors->has('manufacturer') ? 'is-invalid' : '' }}" name="manufacturer" id="manufacturer" value="{{ old('manufacturer', $product->manufacturer->name) }}">
+        <input type="text" class="form-control {{ $errors->has('manufacturer') ? 'is-invalid' : '' }}" name="manufacturer" id="manufacturer" value="{{ old('manufacturer', $product->manufacturer ? $product->manufacturer->name : '') }}">
       </div>
     </div>
 
@@ -137,7 +137,7 @@
       <div class="col-sm-10">
         <div class="form-check">
           <input type="hidden" name="inactive" id="inactiveHidden" value="0" />
-          <input type="checkbox" class="form-check-input" name="inactive" id="inactive" {{ old("inactive", $product->inactive) == TRUE ? "checked" : "" }} />
+          <input type="checkbox" class="form-check-input" name="inactive" id="inactive" value="1" {{ old("inactive", $product->inactive) == TRUE ? "checked" : "" }} />
         </div>
       </div>
     </div>
@@ -147,7 +147,7 @@
       <div class="col-sm-10">
         <div class="form-check">
           <input type="hidden" name="hide_on_website" id="hide_on_websiteHidden" value="0" />
-          <input type="checkbox" class="form-check-input" name="hide_on_website" id="hide_on_website" {{ old("hide_on_website", $product->hide_on_website) == TRUE ? "checked" : "" }} />
+          <input type="checkbox" class="form-check-input" name="hide_on_website" id="hide_on_website" value="1" {{ old("hide_on_website", $product->hide_on_website) == TRUE ? "checked" : "" }} />
         </div>
       </div>
     </div>
