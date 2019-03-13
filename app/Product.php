@@ -19,6 +19,16 @@ class Product extends Model
     return 'slug';
   }
 
+  public function categories()
+  {
+    return $this->belongsToMany(ProductCategory::class)->withTimestamps();
+  }
+
+  public function images()
+  {
+    return $this->belongsToMany(Image::class)->withTimestamps();
+  }
+
   public function manufacturer()
   {
     return $this->belongsTo(ProductManufacturer::class, 'manufacturer_id');
@@ -27,10 +37,5 @@ class Product extends Model
   public function rates()
   {
     return $this->hasMany(ProductRate::class, 'product_id')->orderBy('hours');
-  }
-
-  public function categories()
-  {
-    return $this->belongsToMany(ProductCategory::class)->withTimestamps();
   }
 }

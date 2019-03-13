@@ -20,7 +20,7 @@
 
   @include('partials.errors')
 
-  <form method="post" action="/product/{{ $product->slug }}">
+  <form method="post" action="/product/{{ $product->slug }}" enctype="multipart/form-data">
 
     @CSRF
     @METHOD('PATCH')
@@ -118,6 +118,13 @@
             @include('product.category.category_select_option')
           @endforeach
         </select>
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <label for="images[]" class="col-sm-2 form-control-label {{ $errors->has('images') ? 'text-danger' : '' }}">Images:</label>
+      <div class="col-sm-10">
+        <input type="file" class="form-control {{ $errors->has('images') ? 'is-invalid' : '' }}" id="images[]" name="images[]" multiple />
       </div>
     </div>
 

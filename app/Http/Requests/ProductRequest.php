@@ -25,35 +25,36 @@ class ProductRequest extends FormRequest
     public function rules()
     {
         return [
-          'type' => ['required', 'size:1'],
-          'name' => ['required', 'min:3', 'max:255', 'string'],
+          'categories.*' => ['integer', 'exists:product_categories,id'],
           'description' => ['min:3', 'string', 'nullable'],
-          'product_key' => [
-            'required',
-            'string',
-            Rule::unique('products')->ignore($this->product->product_key, 'product_key')
-          ],
+          'header' => ['string', 'nullable'],
+          'hide_on_website' => ['boolean'],
+          'images.*' => ['image', 'nullable'],
+          'inactive' => ['boolean'],
+          'manufacturer' => ['string', 'nullable'],
+          'model' => ['string', 'nullable'],
+          'name' => ['required', 'min:3', 'max:255', 'string'],
           'part_number' => ['string', 'nullable'],
           'por_id' => [
             'integer',
             'nullable',
             Rule::unique('products')->ignore($this->product->por_id, 'por_id')
           ],
-          'header' => ['string', 'nullable'],
+          'product_key' => [
+            'required',
+            'string',
+            Rule::unique('products')->ignore($this->product->product_key, 'product_key')
+          ],
+          'rates.*.period' => ['required_with:rates.*.time', 'numeric'],
+          'rates.*.rate' => ['numeric', 'required_with:rates.*.time', 'nullable'],
+          'rates.*.time' => ['numeric', 'required_with:rates.*.rate', 'nullable'],
           'quantity' => ['numeric', 'nullable'],
           'slug' => [
             'string',
             'nullable',
             Rule::unique('products')->ignore($this->product->slug, 'slug')
           ],
-          'model' => ['string', 'nullable'],
-          'inactive' => ['boolean'],
-          'hide_on_website' => ['boolean'],
-          'categories.*' => ['integer', 'exists:product_categories,id'],
-          'rates.*.time' => ['numeric', 'required_with:rates.*.rate', 'nullable'],
-          'rates.*.period' => ['required_with:rates.*.time', 'numeric'],
-          'rates.*.rate' => ['numeric', 'required_with:rates.*.time', 'nullable'],
-          'manufacturer' => ['string', 'nullable']
+          'type' => ['required', 'size:1'],
         ];
     }
 }

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\ProductRequest;
 use Illuminate\Support\Facades\Auth;
 
+use App\Image;
 use App\Product;
 use App\ProductCategory;
 use App\ProductType;
@@ -169,6 +170,20 @@ class ProductController extends Controller
 
         // create product_category map
         $product->categories()->sync(request()->input('categories'));
+
+        if (request()->hasFIle('images'))
+        {
+          foreach (request()->file('images') as $image)
+          {
+            $filename = $image->storeAs('images/product', $product->slug . "_" . date("Ymd_His"));
+            $imageStored = Image::create([
+              'filename' => $filename
+            ]);
+            
+            $uploadedImages[] = $imageStored->id;
+          }
+          $product->images()->sync($uploadedImages);
+        }
 
       session()->flash('status', "Product: $product->name was updated successfully!");
       });
