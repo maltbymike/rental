@@ -13,16 +13,30 @@
       <div class="card-body">
         <div class="row">
 
-          <div class="text-center col-sm-3">
+          <div class="text-center col-xl-2 col-sm-3 col-6 mb-4">
+            <a href="/product/">
+              <i class="fas fa-list fa-6x"></i>
+              <div>List All Products</div>
+            </a>
+          </div>
+
+          <div class="text-center col-xl-2 col-sm-3 col-6 mb-4">
+            <a href="/product/create/">
+              <i class="fas fa-plus-circle fa-6x"></i>
+              <div>Add New Product</div>
+            </a>
+          </div>
+
+          <div class="text-center col-xl-2 col-sm-3 col-6 mb-4">
             <a href="/product/category/">
-              <img src="{{ asset('img/icons/Tools.png') }}">
+              <i class="fas fa-stream fa-6x"></i>
               <div>Product Categories</div>
             </a>
           </div>
 
-          <div class="text-center col-sm-3">
+          <div class="text-center col-xl-2 col-sm-3 col-6 mb-4">
             <a href="/product/category/create">
-              <img src="{{ asset('img/icons/add.png') }}">
+              <i class="fas fa-folder-plus fa-6x"></i>
               <div>Add New Product Categories</div>
             </a>
           </div>
