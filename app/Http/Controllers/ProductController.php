@@ -93,6 +93,12 @@ class ProductController extends Controller
           // create product_category map
           $product->categories()->attach(request()->input('categories'));
 
+          // add images
+          if (request()->hasFIle('images'))
+          {
+            $this->addImages($product, request()->file('images'));
+          }
+
         session()->flash('status', "Product: $product->name was created successfully!");
         });
 
@@ -204,6 +210,20 @@ class ProductController extends Controller
       $product->delete();
 
       return redirect('/product');
+    }
+
+    public function addImages($product, $images)
+    {
+        foreach ($images as $image)
+        {
+          $filename = $image->storeAs('product', $product->slug . "_" . date("Ymd_His") . "." . $image->getClientOriginalExtension(), 'images');
+          $imageStored = Image::create([
+            'filename' => $filename
+          ]);
+
+          $uploadedImages[] = $imageStored->id;
+        }
+        return $product->images()->attach($uploadedImages);
     }
 
     public function getCategoryDataForSelectOption()

@@ -20,6 +20,9 @@
                     </a>
 
                     <div class="dropdown-menu dropdown-menu-left" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="/product">List All Products</a>
+                        <a class="dropdown-item" href="/product/create">Add New Product</a>
+                        <div class="dropdown-divider"></div>
                         <a class="dropdown-item" href="/product/category">Product Categories</a>
                         <a class="dropdown-item" href="/product/category/create">Add New Product Categories</a>
                     </div>

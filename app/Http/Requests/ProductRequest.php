@@ -38,12 +38,12 @@ class ProductRequest extends FormRequest
           'por_id' => [
             'integer',
             'nullable',
-            Rule::unique('products')->ignore($this->product->por_id, 'por_id')
+            Rule::unique('products')->ignore(isset($this->product) ? $this->product->por_id : '', 'por_id')
           ],
           'product_key' => [
             'required',
             'string',
-            Rule::unique('products')->ignore($this->product->product_key, 'product_key')
+            Rule::unique('products')->ignore(isset($this->product) ? $this->product->product_key : '', 'product_key')
           ],
           'rates.*.period' => ['required_with:rates.*.time', 'numeric'],
           'rates.*.rate' => ['numeric', 'required_with:rates.*.time', 'nullable'],
@@ -52,7 +52,7 @@ class ProductRequest extends FormRequest
           'slug' => [
             'string',
             'nullable',
-            Rule::unique('products')->ignore($this->product->slug, 'slug')
+            Rule::unique('products')->ignore(isset($this->product) ? $this->product->slug : '', 'slug')
           ],
           'type' => ['required', 'size:1'],
         ];
