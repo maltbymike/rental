@@ -100,7 +100,7 @@
       <label for="categories[]" class="col-sm-2 form-control-label {{ $errors->has('categories') ? 'text-danger' : '' }}">Categories:</label>
       <div class="col-sm-10">
         <select multiple class="form-control {{ $errors->has('categories') ? 'is-invalid' : '' }}" id="categories[]" name="categories[]" size="10">
-            @foreach ($categories as $category)
+            @foreach ($categories as $category_for_select)
             <?php $category_level = 0; ?>
             @include('product.category.category_select_option')
           @endforeach

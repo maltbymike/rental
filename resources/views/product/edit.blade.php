@@ -123,7 +123,14 @@
 
     <div class="form-group row">
       <label for="images[]" class="col-sm-2 form-control-label {{ $errors->has('images') ? 'text-danger' : '' }}">Images:</label>
-      <div class="col-sm-10">
+      @foreach($images as $image)
+        <div class="col-xl-1 col-sm-2 col-3">
+          <img class="d-block w-100 border" src="{{ asset('/storage/images/' . $image->filename) }}" alt="Image of {{ $product->name }}" />
+        </div>
+      @endforeach
+    </div>
+    <div class="form-group row">
+      <div class="col-sm-4 offset-sm-2">
         <input type="file" class="form-control {{ $errors->has('images') ? 'is-invalid' : '' }}" id="images[]" name="images[]" multiple />
       </div>
     </div>

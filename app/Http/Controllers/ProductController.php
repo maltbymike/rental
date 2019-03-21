@@ -108,8 +108,9 @@ class ProductController extends Controller
     public function show(Product $product)
     {
       $loggedIn = Auth::check();
+      $images = $product->images()->get();
 
-      return view('product.show', compact('product', 'loggedIn'));
+      return view('product.show', compact('product', 'loggedIn', 'images'));
     }
 
     /**
@@ -121,9 +122,10 @@ class ProductController extends Controller
     public function edit(Product $product)
     {
       $categories = $this->getCategoryDataForSelectOption();
+      $images = $product->images()->get();
       $types = ProductType::select('type_code', 'name')->orderby('name')->get()->toArray();
 
-      return view('product.edit', compact('product', 'categories', 'types'));
+      return view('product.edit', compact('product', 'categories', 'images', 'types'));
     }
 
     /**
@@ -175,14 +177,14 @@ class ProductController extends Controller
         {
           foreach (request()->file('images') as $image)
           {
-            $filename = $image->storeAs('images/product', $product->slug . "_" . date("Ymd_His"));
+            $filename = $image->storeAs('product', $product->slug . "_" . date("Ymd_His") . "." . $image->getClientOriginalExtension(), 'images');
             $imageStored = Image::create([
               'filename' => $filename
             ]);
-            
+
             $uploadedImages[] = $imageStored->id;
           }
-          $product->images()->sync($uploadedImages);
+          $product->images()->attach($uploadedImages);
         }
 
       session()->flash('status', "Product: $product->name was updated successfully!");
