@@ -32,7 +32,7 @@ Breadcrumbs::for('products', function ($trail) {
 });
 
 Breadcrumbs::for('product', function ($trail, $product) {
-  $trail->parent('products');
+  $trail->parent('category', $product->categories->first());
   $trail->push($product->name, route('product.show', $product->slug));
 });
 
