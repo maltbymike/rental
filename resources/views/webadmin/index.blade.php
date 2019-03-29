@@ -34,6 +34,13 @@
             </a>
           </div>
 
+          <div class="text-center col-xl-2 col-sm-3 col-6 mb-4">
+            <a href="/product/upload">
+              <i class="fas fa-upload fa-6x"></i>
+              <div>Upload Products from CSV</div>
+            </a>
+          </div>
+
         </div>
       </div>
   </div>

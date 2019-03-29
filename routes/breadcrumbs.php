@@ -41,4 +41,9 @@ Breadcrumbs::for('product-edit', function ($trail, $product) {
   $trail->push('Edit', route('product.edit', $product->slug));
 });
 
+Breadcrumbs::for('product-upload', function ($trail) {
+  $trail->parent('products');
+  $trail->push('Upload', '/product/upload');
+});
+
 ?>

@@ -20,4 +20,6 @@ Auth::routes();
 Route::get('/webadmin', 'WebadminController@index');
 
 Route::resource('product/category', 'ProductCategoryController');
+Route::get('product/upload', 'ProductController@upload');
+Route::post('product/upload', "ProductController@processUpload");
 Route::resource('product', 'ProductController');
