@@ -9,8 +9,6 @@ use App\Product;
 
 class ProductCategory extends Model
 {
-    use SoftDeletes;
-
     protected $dates = ['deleted_at'];
     protected $guarded = [];
 
