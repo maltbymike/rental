@@ -25,5 +25,9 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         Schema::defaultStringLength(191);
+
+        $this->commands([
+          \App\Console\Commands\ImportProducts::class
+        ]);
     }
 }
