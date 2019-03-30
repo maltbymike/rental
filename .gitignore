@@ -1,7 +1,6 @@
 /node_modules
 /public/hot
 /public/storage
-/resources/pendingproducts
 /storage/*.key
 /vendor
 .env
