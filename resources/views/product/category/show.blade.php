@@ -50,7 +50,7 @@
       @if ($product->inactive) <tr class="table-danger">
       @else <tr>
       @endif
-        <th scope="row">{{ $product->name }}</th>
+        <th scope="row"><a href="/product/{{ $product->slug }}">{{ $product->name }}</a></th>
         <td class="text-center d-none d-sm-table-cell">{{ $product->rates->firstWhere('hours', ">=", env('4_HOURS')) ? $product->rates->firstWhere('hours', ">=", env('4_HOURS'))->rate : "---" }}</td>
         <td class="text-center table-dark">{{ $product->rates->firstWhere('hours', ">=", env('DAY_HOURS')) ? $product->rates->firstWhere('hours', ">=", env('DAY_HOURS'))->rate : "---" }}</td>
         <td class="text-center d-none d-sm-table-cell">{{ $product->rates->firstWhere('hours', ">=", env('WEEK_HOURS')) ? $product->rates->firstWhere('hours', ">=", env('WEEK_HOURS'))->rate : "---" }}</td>

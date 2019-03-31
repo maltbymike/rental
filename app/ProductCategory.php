@@ -34,12 +34,24 @@ class ProductCategory extends Model
 
     public function products()
     {
-      return $this->belongsToMany(Product::class)->with('rates')->withTimestamps();
+      return $this->belongsToMany(Product::class)
+        ->with('rates')
+        ->withTimestamps();
     }
 
     public function productsWithRates()
     {
-      return $this->belongsToMany(Product::class)->with('rates')->withTimestamps();
+      return $this->belongsToMany(Product::class)
+        ->where('inactive', '0')
+        ->where('hide_on_website', '0')
+        ->where('quantity', ">", '0')
+        ->where(function ($query) {
+          $query->where('type', '<>', 'V')
+                ->whereNull('header')
+                ->orWhereIn('type', ["V", "K", "D"]);
+        })
+        ->with('rates')
+        ->withTimestamps();
     }
 
 }

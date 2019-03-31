@@ -46,82 +46,86 @@ class ImportProducts extends Command
      */
     public function handle()
     {
-      $path = glob(base_path('resources/pendingproducts/*.csv'));
-
-      $path = $path[0];
-
-      $categories = ProductCategory::all();
-
-      $data = $this->getDataFromCSV($path);
-
-      $line = 1;
-      foreach ($data as $row)
+      if ($path = glob(base_path('resources/pendingproducts/*.csv')))
       {
-        $validated = $this->validateCSVRow($row, $line);
 
-        // Update or Create product
-        $product = Product::updateOrCreate(
-          ['por_id' => $row['por_id']],
-          [
-            'product_key' => $row['product_key'],
-            'name' => $row['name'],
-            'quantity' => $row['quantity'],
-            'type' => $row['type'],
-            'part_number' => $row['part_number'],
-            'model' => $row['model'],
-            'header' => $row['header'],
-            'inactive' => $row['inactive'],
-            'hide_on_website' => $row['hide_on_website'],
-            'weight' => $row['weight'],
-            'slug' => str_slug($row['name'] . '-' . $row['product_key']),
-          ]
-        );
+        $path = $path[0];
 
-        // Get manufacturer_id and unset manufacturer
-        if ($row['manufacturer'])
+        $categories = ProductCategory::all();
+
+        $data = $this->getDataFromCSV($path);
+
+        $line = 1;
+        foreach ($data as $row)
         {
-          $manufacturer = ProductManufacturer::firstOrCreate(['name' => $row['manufacturer']]);
-          $product->manufacturer()->associate($manufacturer);
-          $product->save();
-        }
+          $validated = $this->validateCSVRow($row, $line);
 
-        // create rates
-        foreach ($row['rates'] as $rate)
-        {
-          if (!empty($rate['time']))
-          {
-            $data = [
-              'hours' => $rate['time'],
-              'rate' => $rate['rate']
-            ];
-
-            $updateRate = $product->rates()->where('hours', $data['hours'])->first() ?: new ProductRate($data);
-
-            $updateRate->hours = $data['hours'];
-            $updateRate->rate = $data['rate'];
-
-            $product->rates()->save($updateRate);
-          }
-        }
-
-        // Associate category
-        if ($row['por_category'])
-        {
-          $category = ProductCategory::firstOrCreate(
-            ['por_id' => $row['por_category']],
+          // Update or Create product
+          $product = Product::updateOrCreate(
+            ['por_id' => $row['por_id']],
             [
-              'name' => 'Category Added From CSV Import',
-              'slug' => $row['por_category'],
+              'product_key' => $row['product_key'],
+              'name' => $row['name'],
+              'quantity' => $row['quantity'],
+              'type' => $row['type'],
+              'part_number' => $row['part_number'],
+              'model' => $row['model'],
+              'header' => $row['header'],
+              'inactive' => $row['inactive'],
+              'hide_on_website' => $row['hide_on_website'],
+              'weight' => $row['weight'],
+              'slug' => str_slug($row['name'] . '-' . $row['product_key']),
             ]
           );
-          $product->categories()->attach($category);
-          $product->save();
+
+          // Get manufacturer_id and unset manufacturer
+          if ($row['manufacturer'])
+          {
+            $manufacturer = ProductManufacturer::firstOrCreate(['name' => $row['manufacturer']]);
+            $product->manufacturer()->associate($manufacturer);
+            $product->save();
+          }
+
+          // create rates
+          foreach ($row['rates'] as $rate)
+          {
+            if (!empty($rate['time']))
+            {
+              $data = [
+                'hours' => $rate['time'],
+                'rate' => $rate['rate']
+              ];
+
+              $updateRate = $product->rates()->where('hours', $data['hours'])->first() ?: new ProductRate($data);
+
+              $updateRate->hours = $data['hours'];
+              $updateRate->rate = $data['rate'];
+
+              $product->rates()->save($updateRate);
+            }
+          }
+
+          // Associate category
+          if ($row['por_category'])
+          {
+            $category = ProductCategory::firstOrCreate(
+              ['por_id' => $row['por_category']],
+              [
+                'name' => 'Category Added From CSV Import',
+                'slug' => $row['por_category'],
+              ]
+            );
+            $product->categories()->sync($category);
+            $product->save();
+          }
+
+          $line++;
         }
+        $line--;
+        echo "Successfully imported $line items";
 
-        $line++;
+        unlink($path);
       }
-
-      unlink($path);
     }
 
     public function getDBFields()
