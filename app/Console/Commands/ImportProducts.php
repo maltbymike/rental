@@ -58,6 +58,13 @@ class ImportProducts extends Command
         $line = 1;
         foreach ($data as $row)
         {
+          // Only process rental items
+          $rental_types = ['T', 'V', 'U', 'K', 'D', 'H'];
+          if (!in_array($row['type'], $rental_types))
+          {
+            continue;
+          }
+
           $validated = $this->validateCSVRow($row, $line);
 
           // Update or Create product
@@ -115,7 +122,7 @@ class ImportProducts extends Command
                 'slug' => $row['por_category'],
               ]
             );
-            $product->categories()->sync($category);
+            $product->categories()->syncWithoutDetaching($category);
             $product->save();
           }
 

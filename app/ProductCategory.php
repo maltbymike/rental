@@ -46,7 +46,7 @@ class ProductCategory extends Model
         ->where('hide_on_website', '0')
         ->where('quantity', ">", '0')
         ->where(function ($query) {
-          $query->where('type', '<>', 'V')
+          $query->whereIn('type', ['T', 'U', 'H', ])
                 ->whereNull('header')
                 ->orWhereIn('type', ["V", "K", "D"]);
         })
