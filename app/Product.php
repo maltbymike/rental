@@ -18,6 +18,24 @@ class Product extends Model
     return 'slug';
   }
 
+  public function parent()
+  {
+    return $this->belongsTo(Product::class, 'header', 'product_key');
+  }
+
+  public function children()
+  {
+    return $this->hasMany(Product::class, 'header', 'product_key');
+  }
+
+  public function activeChildren()
+  {
+    return $this->hasMany(Product::class, 'header', 'product_key')
+      ->where('inactive', '0')
+      ->where('hide_on_website', '0')
+      ->where('quantity', ">", "0");
+  }
+
   public function categories()
   {
     return $this->belongsToMany(ProductCategory::class)->withTimestamps();
