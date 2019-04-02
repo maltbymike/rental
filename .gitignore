@@ -2,6 +2,7 @@
 /public/hot
 /public/storage
 /storage/*.key
+/resources/pendingproducts/*.csv
 /vendor
 .env
 .phpunit.result.cache

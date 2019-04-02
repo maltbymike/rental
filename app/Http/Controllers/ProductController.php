@@ -27,11 +27,7 @@ class ProductController extends Controller
         $this->middleware('auth')->except(['index', 'show']);
     }
 
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
     public function index()
     {
       if ($loggedIn = Auth::check())
@@ -47,11 +43,7 @@ class ProductController extends Controller
 
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
     public function create()
     {
         $categories = $this->getCategoryDataForSelectOption();
@@ -60,12 +52,7 @@ class ProductController extends Controller
         return view('product.create', compact('categories', 'types'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
+
     public function store(ProductRequest $request)
     {
         DB::transaction(function()
@@ -110,12 +97,7 @@ class ProductController extends Controller
         return redirect('/product');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Product  $product
-     * @return \Illuminate\Http\Response
-     */
+
     public function show(Product $product)
     {
       $loggedIn = Auth::check();
@@ -124,12 +106,6 @@ class ProductController extends Controller
       return view('product.show', compact('product', 'loggedIn', 'images'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Product  $product
-     * @return \Illuminate\Http\Response
-     */
     public function edit(Product $product)
     {
       $categories = $this->getCategoryDataForSelectOption();
@@ -139,13 +115,7 @@ class ProductController extends Controller
       return view('product.edit', compact('product', 'categories', 'images', 'types'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Product  $product
-     * @return \Illuminate\Http\Response
-     */
+
     public function update(ProductRequest $request, Product $product)
     {
       DB::transaction(function() use ($product)
@@ -205,12 +175,7 @@ class ProductController extends Controller
       return redirect("/product/" . $product->slug);
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Product  $product
-     * @return \Illuminate\Http\Response
-     */
+
     public function destroy(Product $product)
     {
       $product->delete();
@@ -218,26 +183,22 @@ class ProductController extends Controller
       return redirect('/product/category');
     }
 
+
     public function upload()
     {
       return view('product.upload.index');
     }
 
+
     public function processUpload(ProductUploadCSVRequest $request)
     {
-      // get file from upload
       $path = request()->file('file')->getRealPath();
 
-      // turn into array
-      $file = file($path);
+      $file = file($path);  // turn into array
 
-      // grab header line
-      $header = current($file);
+      $header = current($file);  // grab header line
+      $data = array_slice($file, 1);    // remove header line from array
 
-      // remove header line
-      $data = array_slice($file, 1);
-
-      // Loop through file into parts
       $parts = (array_chunk($data, 500));
       $i = 1;
       foreach($parts as $part)
@@ -252,6 +213,7 @@ class ProductController extends Controller
 
       return redirect('/webadmin');
     }
+
 
     public function addImages($product, $images)
     {
