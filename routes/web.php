@@ -23,3 +23,4 @@ Route::resource('product/category', 'ProductCategoryController');
 Route::get('product/upload', 'ProductController@upload');
 Route::post('product/upload', "ProductController@processUpload");
 Route::resource('product', 'ProductController');
+Route::get('product', 'ProductCategoryController@index');

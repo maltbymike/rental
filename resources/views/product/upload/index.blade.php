@@ -23,7 +23,7 @@
   </form>
 
   <label for="pendingfiles" class="form-control-label"><strong>Pending Files in Upload Queue</strong></label>
-  <select multiple class="form-control" id="pendingfiles">
+  <select multiple class="form-control" size="15" id="pendingfiles">
     @foreach ($pendingfiles as $file)
       <option>{{ $file }}</option>
     @endforeach

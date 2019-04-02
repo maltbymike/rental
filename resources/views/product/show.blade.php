@@ -84,16 +84,20 @@
           </ol>
           <div class="carousel-inner">
             <?php $i = 0; ?>
-            @foreach($images as $image)
-              @if ($i == 0)
-                <div class="carousel-item active">
-              @else
-                <div class="carousel-item">
-              @endif
-                  <img class="d-block w-100" src="{{ asset('/storage/images/' . $image->filename) }}" alt="Image of {{ $product->name }}" />
-                </div>
-              <?php $i++; ?>
-            @endforeach
+            @if (count($images))
+              @foreach($images as $image)
+                @if ($i == 0)
+                  <div class="carousel-item active">
+                @else
+                  <div class="carousel-item">
+                @endif
+                    <img class="d-block w-100" src="{{ asset('/storage/images/' . $image->filename) }}" alt="Image of {{ $product->name }}" />
+                  </div>
+                <?php $i++; ?>
+              @endforeach
+            @else
+              <img class="d-block w-100" src="https://via.placeholder.com/1200x1200?text=Image+Coming+Soon" />
+            @endif
           </div>
           <a class="carousel-control-prev" href="#productImageCarousel" role="button" data-slide="prev">
             <span class="carousel-control-prev-icon" aria-hidden="true"></span>
