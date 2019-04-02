@@ -186,7 +186,9 @@ class ProductController extends Controller
 
     public function upload()
     {
-      return view('product.upload.index');
+      $pendingfiles = glob(base_path('resources/pendingproducts/*.csv'));
+
+      return view('product.upload.index', compact('pendingfiles'));
     }
 
 
