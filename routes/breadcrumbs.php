@@ -5,11 +5,6 @@ Breadcrumbs::for('home', function ($trail) {
   $trail->push('Home', "/");
 });
 
-// webadmin
-Breadcrumbs::for('webadmin', function($trail) {
-  $trail->push('Webadmin', '/webadmin');
-});
-
 // Categories
 Breadcrumbs::for('categories', function ($trail) {
   $trail->parent('home');
@@ -50,5 +45,16 @@ Breadcrumbs::for('product-upload', function ($trail) {
   $trail->parent('webadmin');
   $trail->push('Upload', '/product/upload');
 });
+
+// webadmin
+Breadcrumbs::for('webadmin', function($trail) {
+  $trail->push('Webadmin', '/webadmin');
+});
+
+Breadcrumbs::for('image-create', function($trail, $type) {
+  $trail->parent('webadmin', '/webadmin');
+  $trail->push('Add Image', '/image/' . $type . '/create');
+
+})
 
 ?>

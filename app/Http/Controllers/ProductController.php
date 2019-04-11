@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Auth;
 
 use App\CsvData;
 use App\Image;
+use App\ImageType;
 use App\Product;
 use App\ProductCategory;
 use App\ProductType;
@@ -157,12 +158,16 @@ class ProductController extends Controller
         // upload images
         if (request()->hasFIle('images'))
         {
+          $type = ImageType::where('slug', 'product')->first();
+
           foreach (request()->file('images') as $image)
           {
-            $filename = $image->storeAs('product', $product->slug . "_" . date("Ymd_His") . "." . $image->getClientOriginalExtension(), 'images');
-            $imageStored = Image::create([
-              'filename' => $filename
-            ]);
+            $filename = $image->store('product', 'images');
+
+            $imageStored = new Image;
+            $imageStored->filename = $filename;
+            $imageStored->type()->associate($type);
+            $imageStored->save();
 
             $uploadedImages[] = $imageStored->id;
           }

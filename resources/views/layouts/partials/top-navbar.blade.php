@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-md navbar-light navbar-laravel fixed-top">
+<nav class="navbar fixed-top navbar-expand-md navbar-light bg-light navbar-laravel fixed-top">
   <a class="navbar-brand" href="{{ url('/') }}">
       <img class="img-responsive mr-4" src="/img/ingersoll_rent_all_logo.png" />
   </a>
@@ -26,6 +26,16 @@
                   <a class="dropdown-item" href="/product/category/create">Add New Product Categories</a>
                   <div class="dropdown-divider"></div>
                   <a class="dropdown-item" href="/product/upload">Upload Products from CSV</a>
+              </div>
+          </li>
+
+          <li class="nav-item dropdown">
+              <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                  Options <span class="caret"></span>
+              </a>
+
+              <div class="dropdown-menu dropdown-menu-left" aria-labelledby="navbarDropdown">
+                  <a class="dropdown-item" href="/webadmin/options/homepage">Homepage Options</a>
               </div>
           </li>
         @endauth

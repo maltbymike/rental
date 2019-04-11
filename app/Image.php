@@ -10,6 +10,12 @@ class Image extends Model
 
     public function products()
     {
-      return $this->belongsToMany('Product::class', 'product_id');
+      return $this->belongsToMany(Product::class, 'product_id');
     }
+
+    public function type()
+    {
+      return $this->belongsTo(ImageType::class, 'image_type_id');
+    }
+
 }
