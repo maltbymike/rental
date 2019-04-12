@@ -35,7 +35,7 @@
               </a>
 
               <div class="dropdown-menu dropdown-menu-left" aria-labelledby="navbarDropdown">
-                  <a class="dropdown-item" href="/webadmin/options/homepage">Homepage Options</a>
+                  <a class="dropdown-item" href="/settings/homepage">Homepage Options</a>
               </div>
           </li>
         @endauth
