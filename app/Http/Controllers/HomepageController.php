@@ -32,6 +32,7 @@ class HomepageController extends Controller
   {
     if (request()->hasFile('image'))
     {
+      dd(request()->file('image'));
       $filename = request()->file('image')->store('homepage-carousel', 'images');
 
       $image = new HomepageCarousel;
