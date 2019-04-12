@@ -15,7 +15,7 @@ Auth::routes();
 
 Route::get('/', 'HomepageController@index');
 Route::get('/settings/homepage', 'HomepageController@editSettings');
-Route::post('/settings/homepage', 'HomepageController@updateSettings');
+Route::patch('/settings/homepage', 'HomepageController@updateSettings');
 
 Route::get('/webadmin', 'WebadminController@index');
 
