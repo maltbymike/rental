@@ -28,7 +28,7 @@ class HomepageController extends Controller
     return view('webadmin.settings.homepage', compact('images'));
   }
 
-  public function updateSettings(Request $request)
+  public function updateSettings(HomepageCarouselRequest $request)
   {
     if (request()->hasFile('image'))
     {
