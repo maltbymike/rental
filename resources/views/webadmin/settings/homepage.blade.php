@@ -10,10 +10,9 @@
 
   @include('partials.errors')
 
-  <form method="post" action="/settings/homepage/" enctype="multipart/form-data">
+  <form method="post" action="/settings/homepage" enctype="multipart/form-data">
 
     @CSRF
-    @METHOD('PATCH')
 
     <div class="card">
       <div class="card-header">Homepage Slider Images</div>
