@@ -27,6 +27,7 @@ class Kernel extends ConsoleKernel
         // $schedule->command('inspire')
         //          ->hourly();
         $schedule->command('import:products')->everyMinute();
+        $schedule->command('telescope:prune')->daily();
     }
 
     /**
