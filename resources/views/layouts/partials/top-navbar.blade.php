@@ -11,12 +11,12 @@
       <ul class="navbar-nav mr-auto">
         @auth
           <li class="nav-item">
-              <a class="nav-link" href="/webadmin">Admin Home</a>
+              <a class="nav-link font-weight-bold" href="/webadmin">Admin Home</a>
           </li>
 
           <li class="nav-item dropdown">
-              <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                  Inventory <span class="caret"></span>
+              <a id="navbarDropdown" class="nav-link dropdown-toggle font-weight-bold" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                  Inventory<span class="caret"></span>
               </a>
 
               <div class="dropdown-menu dropdown-menu-left" aria-labelledby="navbarDropdown">
@@ -30,7 +30,7 @@
           </li>
 
           <li class="nav-item dropdown">
-              <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+              <a id="navbarDropdown" class="nav-link dropdown-toggle font-weight-bold" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                   Options <span class="caret"></span>
               </a>
 
@@ -39,6 +39,15 @@
               </div>
           </li>
         @endauth
+
+        <li class="nav-item">
+            <a class="nav-link font-weight-bold" href="/product/category">Rental Equipment</a>
+        </li>
+
+        <li class="nav-item">
+            <a class="nav-link font-weight-bold" href="/#contact">Contact Us</a>
+        </li>
+
       </ul>
 
       <!-- Right Side Of Navbar -->

@@ -18,11 +18,19 @@
       <div class="carousel-inner" role="listbox">
         @foreach($images as $image)
           <div class="carousel-item {{ $loop->first ? 'active' : '' }}" style="background-image: url({{ asset('/storage/images/' . $image->filename) }})">
-            <div class="carousel-caption d-none d-block bg-dark rounded" style="opacity: .7">
-              <h3>{{ $image->title }}</h3>
-              <p>{{ $image->caption }}</p>
-              <a href="{{ $image->link_to }}" class="btn btn-primary">{{ $image->button_text }}</a>
-            </div>
+            @if ($image->title OR $image->caption OR $image->link_to)
+              <div class="carousel-caption d-none d-block rounded" style="background-color: rgba(0, 0, 0, .7)">
+                @if ($image->title)
+                  <h3 class="text-primary">{{ $image->title }}</h3>
+                @endif
+                @if ($image->caption)
+                  <p>{{ $image->caption }}</p>
+                @endif
+                @if ($image->link_to)
+                  <a href="{{ $image->link_to }}" class="btn btn-primary">{{ $image->button_text }}</a>
+                @endif
+              </div>
+            @endif
           </div>
         @endforeach
       </div>
@@ -41,50 +49,58 @@
   </header>
 
   <!-- Page Content -->
-  <div class="container">
-
-    <h1 class="my-4">Welcome to Modern Business</h1>
-
-    <!-- Marketing Icons Section -->
-    <div class="row">
-      <div class="col-lg-4 mb-4">
-        <div class="card h-100">
-          <h4 class="card-header">Card Title</h4>
-          <div class="card-body">
-            <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sapiente esse necessitatibus neque.</p>
-          </div>
-          <div class="card-footer">
-            <a href="#" class="btn btn-primary">Learn More</a>
-          </div>
-        </div>
-      </div>
-      <div class="col-lg-4 mb-4">
-        <div class="card h-100">
-          <h4 class="card-header">Card Title</h4>
-          <div class="card-body">
-            <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reiciendis ipsam eos, nam perspiciatis natus commodi similique totam consectetur praesentium molestiae atque exercitationem ut consequuntur, sed eveniet, magni nostrum sint fuga.</p>
-          </div>
-          <div class="card-footer">
-            <a href="#" class="btn btn-primary">Learn More</a>
-          </div>
-        </div>
-      </div>
-      <div class="col-lg-4 mb-4">
-        <div class="card h-100">
-          <h4 class="card-header">Card Title</h4>
-          <div class="card-body">
-            <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sapiente esse necessitatibus neque.</p>
-          </div>
-          <div class="card-footer">
-            <a href="#" class="btn btn-primary">Learn More</a>
-          </div>
-        </div>
+  <div class="container-fluid page-section">
+    <div class="container">
+      <div class="py-4 lead text-justify">
+        <p>Ingersoll Rent-All is the leading independent supplier of rental equipment and contractor supplies in Oxford County. From our headquarters in Ingersoll, Ontario we proudly serve the residents, contractors, landscapers, municipalities, farmers, and factories of Ingersoll, Woodstock, Tillsonburg, Dorchester, Thamesford, Tavistock and everywhere in between.</p>
+        <p>Canadian Owned and 100% Independent, we have been serving our community since 1986 with competitively priced, well maintained, quality late model rental equipment and professional grade tools & accessories.</p>
+        <p>We truly have Everything... and what you might need!</p>
       </div>
     </div>
-    <!-- /.row -->
+  </div>
 
-    <!-- Portfolio Section -->
-    <h2>Portfolio Heading</h2>
+  <!-- Rental Equipment Section -->
+  <div class="container-fluid bg-secondary page-section">
+    <div class="container">
+      <h2 class="text-white">Rental Equipment</h2>
+
+      <div class="row">
+
+        <div class="col-md-6 col-lg-4 mb-4 rounded">
+          <div class="card h-100">
+            <a href="#"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
+            <div class="card-footer">
+              <a href="#" class="btn btn-primary btn-block btn-lg">Rent Equipment</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-6 col-lg-4 mb-4">
+          <div class="card h-100">
+            <a href="#"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
+            <div class="card-footer">
+              <a href="#" class="btn btn-primary btn-block btn-lg">Buy Equipment</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-6 col-lg-4 mb-4">
+          <div class="card h-100">
+            <a href="#"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
+            <div class="card-footer">
+              <a href="#" class="btn btn-primary btn-block btn-lg">Learn More</a>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+  <!-- /.row -->
+
+  <!-- Sales Section -->
+  <div class="container-fluid page-section">
+    <h2>Brands We Carry</h2>
 
     <div class="row">
       <div class="col-lg-4 col-sm-6 portfolio-item">
@@ -154,43 +170,72 @@
         </div>
       </div>
     </div>
-    <!-- /.row -->
-
-    <!-- Features Section -->
-    <div class="row">
-      <div class="col-lg-6">
-        <h2>Modern Business Features</h2>
-        <p>The Modern Business template by Start Bootstrap includes:</p>
-        <ul>
-          <li>
-            <strong>Bootstrap v4</strong>
-          </li>
-          <li>jQuery</li>
-          <li>Font Awesome</li>
-          <li>Working contact form with validation</li>
-          <li>Unstyled page elements for easy customization</li>
-        </ul>
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Corporis, omnis doloremque non cum id reprehenderit, quisquam totam aspernatur tempora minima unde aliquid ea culpa sunt. Reiciendis quia dolorum ducimus unde.</p>
-      </div>
-      <div class="col-lg-6">
-        <img class="img-fluid rounded" src="http://placehold.it/700x450" alt="">
-      </div>
-    </div>
-    <!-- /.row -->
-
-    <hr>
-
-    <!-- Call to Action Section -->
-    <div class="row mb-4">
-      <div class="col-md-8">
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Molestias, expedita, saepe, vero rerum deleniti beatae veniam harum neque nemo praesentium cum alias asperiores commodi.</p>
-      </div>
-      <div class="col-md-4">
-        <a class="btn btn-lg btn-secondary btn-block" href="#">Call to Action</a>
-      </div>
-    </div>
-
   </div>
-  <!-- /.container -->
+  <!-- /.row -->
+
+  <!-- Contact Us Section -->
+  <div id="contact" class="container-fluid bg-dark text-light page-section">
+    <div class="container">
+      <h2>Get In Touch With Us</h2>
+
+      <div class="row">
+        <div class="col-lg-6">
+          <h5>Call Us: <a href="tel:519.485.4231">(519) 485-4231</a></h5>
+          <p>We're always here to help, and we love hearing from our customers!</p>
+          <h5>Email Us:</h5>
+          <form method="post" action="/contact">
+            @CSRF
+            <p>Tell us a bit about yourself</p>
+            <div class="form-group row">
+              <div class="col-6">
+                <input type="text" class="form-control {{ $errors->has('first_name') ? 'is-invalid' : '' }}" id="first_name" name="first_name" value="{{ old('first_name') }}" placeholder="First Name" />
+              </div>
+              <div class="col-6">
+                <input type="text" class="form-control {{ $errors->has('last_name') ? 'is-invalid' : '' }}" id="last_name" name="last_name" value="{{ old('last_name') }}" placeholder="Last Name" />
+              </div>
+            </div>
+            <div class="form-group row">
+              <div class="col-12">
+                <input type="text" class="form-control {{ $errors->has('company') ? 'is-invalid' : '' }}" id="company" name="company" value="{{ old('company') }}" placeholder="Company" />
+              </div>
+            </div>
+            <div class="form-group row">
+              <div class="col-12">
+                <input type="tel" class="form-control {{ $errors->has('phone') ? 'is-invalid' : '' }}" id="phone" name="phone" value="{{ old('phone') }}" placeholder="Phone" />
+              </div>
+            </div>
+            <div class="form-group row">
+              <div class="col-12">
+                <input type="email" class="form-control {{ $errors->has('email') ? 'is-invalid' : '' }}" id="email" name="email" value="{{ old('email') }}" placeholder="Email" />
+              </div>
+            </div>
+
+            <p>Tell us how we can help</p>
+            <div class="form-group row">
+              <div class="col-12">
+                <textarea class="form-control" id="message" name="message" rows="8"></textarea>
+              </div>
+            </div>
+
+            <div class="row mb-4">
+              <div class="col-12">
+                <input type="submit" class="btn btn-lg btn-secondary btn-block" value="Send" />
+              </div>
+            </div>
+          </form>
+        </div>
+        <div class="col-lg-6">
+          <h5>Come See Us</h5>
+          <p>We are conveniently located in the Heart of Ingersoll</p>
+          <address>
+            108 Mutual St<br />
+            Ingersoll, ON  N5C 1S5<br />
+          </address>
+          <img class="img-fluid rounded" src="http://placehold.it/700x450" alt="">
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- /.row -->
 
 @endsection

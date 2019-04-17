@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests\HomepageCarouselRequest;
 
 use App\HomepageCarousel;
+use App\ProductCategory;
 
 class HomepageController extends Controller
 {
@@ -17,8 +18,9 @@ class HomepageController extends Controller
   public function index()
   {
     $images = HomepageCarousel::where('inactive', 0)->get();
+    $categories = ProductCategory::where('parent_id', NULL)->get();
 
-    return view('index', compact('images'));
+    return view('index', compact('images', 'categories'));
   }
 
   public function editSettings()
