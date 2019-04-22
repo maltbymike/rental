@@ -18,4 +18,18 @@ class Image extends Model
       return $this->belongsTo(ImageType::class, 'image_type_id');
     }
 
+    public function width()
+    {
+      $dimensions = getimagesize(public_path("/storage/images/" . $this->filename));
+
+      return $dimensions[0];
+    }
+
+    public function height()
+    {
+      $dimensions = getimagesize(public_path("/storage/images/" . $this->filename));
+
+      return $dimensions[1];
+    }
+
 }

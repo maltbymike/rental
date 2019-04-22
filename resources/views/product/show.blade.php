@@ -43,9 +43,15 @@
                 @else
                   <div class="carousel-item">
                 @endif
-                    <img class="h-100 d-block mx-auto" src="{{ asset('/storage/images/' . $image->filename) }}" alt="Image of {{ $product->name }}" />
-                  </div>
-                <?php $i++; ?>
+                  @if ($image->width() < $image->height())
+                    <img class="h-100 d-block mx-auto" src="/storage/images/{{ $image->filename }}" alt="Image of {{ $product->name }}" />
+                  @else
+                    <div class="h-100 d-flex flex-wrap align-items-center">
+                      <img class="w-100" src="/storage/images/{{ $image->filename }}" alt="Image of {{ $product->name }}" />
+                    </div>
+                  @endif
+                </div>
+              <?php $i++; ?>
               @endforeach
             @else
               <div class="carousel-item active">
@@ -71,7 +77,7 @@
 
       <!-- Begin Rates Table -->
       <div class="row mb-4 align-items-end" style="font-size: larger">
-        <h4 class="col-12 col-lg-7 p-3 mt-lg-0 mt-2 mb-0 bg-dark text-light">Rental Rates:</h4>
+        <h4 class="col-12 col-lg-7 p-3 mt-lg-0 mt-2 mb-0 bg-secondary text-light">Rental Rates:</h4>
 
         <p class="order-lg-1 col-7 col-lg d-lg-block d-inline text-lg-center mb-0 p-2 align-bottom">4 Hours</p>
         <p class="btn btn-lg btn-primary order-lg-3 col-5 col-lg mx-lg-1 my-1">{{ $product->rates->firstWhere('hours', ">=", env('4_HOURS')) ? $product->rates->firstWhere('hours', ">=", env('4_HOURS'))->rate : "---" }}</p>
@@ -105,7 +111,7 @@
 
       <!-- Begin Product Content Section -->
       <div class="row">
-        <h4 class="col-12 p-3 bg-dark text-light">{{ $product->name }}</h4>
+        <h4 class="col-12 p-3 bg-secondary text-light">Product Information</h4>
         <p class="col-12">{{ $product->description }}</p>
 
         @if ($product->part_number)
