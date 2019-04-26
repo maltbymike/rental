@@ -80,18 +80,18 @@
         <h4 class="col-12 col-lg-7 p-3 mt-lg-0 mt-2 mb-0 bg-secondary text-light">Rental Rates:</h4>
 
         <p class="order-lg-1 col-7 col-lg d-lg-block d-inline text-lg-center mb-0 p-2 align-bottom">4 Hours</p>
-        <p class="btn btn-lg btn-primary order-lg-3 col-5 col-lg mx-lg-1 my-1">{{ $product->rates->firstWhere('hours', ">=", env('4_HOURS')) ? $product->rates->firstWhere('hours', ">=", env('4_HOURS'))->rate : "---" }}</p>
+        <p class="btn btn-lg btn-outline-primary order-lg-3 col-5 col-lg mx-lg-1 my-1 font-weight-bold">{{ $product->rates->firstWhere('hours', ">=", env('4_HOURS')) ? $product->rates->firstWhere('hours', ">=", env('4_HOURS'))->rate : "---" }}</p>
 
         <p class="order-lg-1 col-7 col-lg d-lg-block d-inline text-lg-center mb-0 p-2">Daily</p>
-        <p class="btn btn-lg btn-primary order-lg-3 col-5 col-lg mx-lg-1 my-1">{{ $product->rates->firstWhere('hours', ">=", env('DAY_HOURS')) ? $product->rates->firstWhere('hours', ">=", env('DAY_HOURS'))->rate : "---" }}</p>
+        <p class="btn btn-lg btn-outline-primary order-lg-3 col-5 col-lg mx-lg-1 my-1 font-weight-bold">{{ $product->rates->firstWhere('hours', ">=", env('DAY_HOURS')) ? $product->rates->firstWhere('hours', ">=", env('DAY_HOURS'))->rate : "---" }}</p>
 
         <p class="order-lg-1 col-7 col-lg d-lg-block d-inline text-lg-center mb-0 p-2">Weekly</p>
-        <p class="btn btn-lg btn-primary order-lg-3 col-5 col-lg mx-lg-1 my-1">{{ $product->rates->firstWhere('hours', ">=", env('WEEK_HOURS')) ? $product->rates->firstWhere('hours', ">=", env('WEEK_HOURS'))->rate : "---" }}</p>
+        <p class="btn btn-lg btn-outline-primary order-lg-3 col-5 col-lg mx-lg-1 my-1 font-weight-bold">{{ $product->rates->firstWhere('hours', ">=", env('WEEK_HOURS')) ? $product->rates->firstWhere('hours', ">=", env('WEEK_HOURS'))->rate : "---" }}</p>
 
         <h4 class="col-12 col-lg-5 mt-lg-0 mt-2 mb-0 p-3 bg-secondary text-lg-center text-light">Weekend Rates</h5>
 
         <p class="order-lg-1 col-7 col-lg d-lg-block d-inline text-lg-center mb-0 p-2">Out Friday After 4pm</p>
-        <p class="btn btn-lg btn-primary order-lg-3 col-5 col-lg mx-lg-1 my-1">
+        <p class="btn btn-lg btn-outline-primary order-lg-3 col-5 col-lg mx-lg-1 my-1 font-weight-bold">
             @if ($product->rates->where('hours', env('DAY_HOURS'))->first())
               {{ number_format($product->rates->where('hours', env('DAY_HOURS'))->first()->rate * 1.5, 2) }}
             @elseif ($product->rates->firstWhere('hours', ">=", env('WEEK_HOURS')))
@@ -102,7 +102,7 @@
         </p>
 
         <p class="order-lg-1 col-7 col-lg d-lg-block d-inline text-lg-center mb-0 p-2">Out Saturday</p>
-        <p class="btn btn-lg btn-primary order-lg-3 col-5 col-lg mx-lg-1 my-1">{{ $product->rates->firstWhere('hours', ">=", env('DAY_HOURS')) ? $product->rates->firstWhere('hours', ">=", env('DAY_HOURS'))->rate : "---" }}</p>
+        <p class="btn btn-lg btn-outline-primary order-lg-3 col-5 col-lg mx-lg-1 my-1 font-weight-bold">{{ $product->rates->firstWhere('hours', ">=", env('DAY_HOURS')) ? $product->rates->firstWhere('hours', ">=", env('DAY_HOURS'))->rate : "---" }}</p>
 
         <div class="order-lg-2 col-12 bg-dark"></div>
 

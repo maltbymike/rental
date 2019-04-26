@@ -16,9 +16,9 @@
     <div class="form-group row">
       <label for="file" class="form-control-label col-sm-2"><strong>CSV File to import</strong></label>
       <input id="file" type="file" class="form-control-file col-sm-10 {{ $errors->has('file') ? 'is-invalid' : '' }}" name="file" required>
-    </dvi>
+    </div>
 
-    <button type="submit" class="btn btn-primary btn-lg btn-block mt-4 mb-4" name="submit"><i class="fa fa-check"></i> Upload</button>
+    <button type="submit" class="btn btn-primary btn-lg btn-block mt-4 mb-4" name="submit"><i class="fa fa-upload"></i> Upload</button>
 
   </form>
 

@@ -59,12 +59,26 @@
     </div>
 
     <div class="form-group row">
+      <label for="por_id" class="col-sm-2 form-control-label {{ $errors->has('por_id') ? 'text-danger' : '' }}">POR ID:</label>
+      <div class="col-sm-10">
+        <input type="text" class="form-control {{ $errors->has('por_id') ? 'is-invalid' : '' }}" name="por_id" id="por_id" value="{{ old('por_id', $category->por_id) }}">
+      </div>
+    </div>
+
+    <div class="form-group row">
       <label for="inactive" class="col-sm-2 form-check-label {{ $errors->has('inactive') ? 'text-danger' : '' }}">Category is Inactive:</label>
       <div class="col-sm-10">
         <div class="form-check">
           <input type="hidden" name="inactive" id="inactiveHidden" value="0" />
           <input type="checkbox" class="form-check-input" name="inactive" id="inactive" value="1" {{ old("inactive", $category->inactive) == '1' ? "checked" : "" }} />
         </div>
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <label for="image" class="col-sm-2 form-control-label {{ $errors->has('image') ? 'text-danger' : '' }}">Image:</label>
+      <div class="col-sm-4">
+        <input type="file" class="form-control {{ $errors->has('image') ? 'is-invalid' : '' }}" id="image" name="image" multiple />
       </div>
     </div>
 

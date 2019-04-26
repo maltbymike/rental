@@ -62,7 +62,7 @@
   <!-- Rental Equipment Section -->
   <div class="container-fluid bg-secondary page-section">
     <div class="container">
-      <h2 class="text-white">Rental Equipment</h2>
+      <h2 class="text-white">Featured Equipment</h2>
 
       <div class="row">
 
@@ -180,7 +180,7 @@
 
       <div class="row">
         <div class="col-lg-6">
-          <h5>Call Us: <a href="tel:519.485.4231">(519) 485-4231</a></h5>
+          <h5><a href="tel:519.485.4231" class="btn btn-block btn-primary font-weight-bold">Call Us: (519) 485-4231</a></h5>
           <p>We're always here to help, and we love hearing from our customers!</p>
           <h5>Email Us:</h5>
           <form method="post" action="/contact">
