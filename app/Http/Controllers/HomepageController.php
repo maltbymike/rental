@@ -18,9 +18,20 @@ class HomepageController extends Controller
   public function index()
   {
     $images = HomepageCarousel::where('inactive', 0)->get();
-    $categories = ProductCategory::where('parent_id', NULL)->get();
+    // $categories = ProductCategory::where('parent_id', NULL)->get();
+    $categories = ProductCategory::with('image')->where('parent_id', '=', NULL)->get();
+    $featured_categories = $categories->pluck('featured', 'id')->filter(function ($value, $key) {
+      if ($value)
+      {
+        return in_array(date('m'), $value);
+      }
+      else
+      {
+        return FALSE;
+      }
+    });
 
-    return view('index', compact('images', 'categories'));
+    return view('index', compact('images', 'categories', 'featured_categories'));
   }
 
   public function editSettings()

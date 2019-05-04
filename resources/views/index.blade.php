@@ -49,9 +49,9 @@
   </header>
 
   <!-- Page Content -->
-  <div class="container-fluid page-section">
+  <div class="container-fluid bg-secondary page-section">
     <div class="container">
-      <div class="py-4 lead text-justify">
+      <div class="py-4 lead text-justify text-white">
         <p>Ingersoll Rent-All is the leading independent supplier of rental equipment and contractor supplies in Oxford County. From our headquarters in Ingersoll, Ontario we proudly serve the residents, contractors, landscapers, municipalities, farmers, and factories of Ingersoll, Woodstock, Tillsonburg, Dorchester, Thamesford, Tavistock and everywhere in between.</p>
         <p>Canadian Owned and 100% Independent, we have been serving our community since 1986 with competitively priced, well maintained, quality late model rental equipment and professional grade tools & accessories.</p>
         <p>We truly have Everything... and what you might need!</p>
@@ -60,55 +60,41 @@
   </div>
 
   <!-- Rental Equipment Section -->
-  <div class="container-fluid bg-secondary page-section">
-    <div class="container">
-      <h2 class="text-white">Featured Equipment</h2>
+  <div class="container-fluid page-section">
+    <h2>Featured Equipment</h2>
 
-      <div class="row">
-
-        <div class="col-md-6 col-lg-4 mb-4 rounded">
-          <div class="card h-100">
-            <a href="#"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
-            <div class="card-footer">
-              <a href="#" class="btn btn-primary btn-block btn-lg">Rent Equipment</a>
+    <div class="row">
+      @foreach($featured_categories as $key => $value)
+        <div class="col-lg-4 col-sm-6">
+          <div class="card h-100 text-center">
+            <a href="#">
+              <img class="card-img-top " src="/storage/images/{{ $categories->firstWhere('id', $key)->image()->value('filename') }}" alt="">
+            </a>
+            <div class="card-body">
+              <h4 class="card-title">
+                <a href="#">{{ $categories->firstWhere('id', $key)->name }}</a>
+              </h4>
+              <p class="card-text">{{ $categories->firstWhere('id', $key)->description }}</p>
             </div>
           </div>
         </div>
+      @endforeach
 
-        <div class="col-md-6 col-lg-4 mb-4">
-          <div class="card h-100">
-            <a href="#"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
-            <div class="card-footer">
-              <a href="#" class="btn btn-primary btn-block btn-lg">Buy Equipment</a>
-            </div>
-          </div>
-        </div>
-
-        <div class="col-md-6 col-lg-4 mb-4">
-          <div class="card h-100">
-            <a href="#"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
-            <div class="card-footer">
-              <a href="#" class="btn btn-primary btn-block btn-lg">Learn More</a>
-            </div>
-          </div>
-        </div>
-
-      </div>
     </div>
   </div>
   <!-- /.row -->
 
   <!-- Sales Section -->
-  <div class="container-fluid page-section">
-    <h2>Brands We Carry</h2>
+  <div class="container-fluid bg-secondary page-section">
+    <h2 class="text-white">New Equipment and Supplies</h2>
 
     <div class="row">
       <div class="col-lg-4 col-sm-6 portfolio-item">
-        <div class="card h-100">
+        <div class="card h-100 text-center">
           <a href="#"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
           <div class="card-body">
             <h4 class="card-title">
-              <a href="#">Project One</a>
+              <a href="#">STIHL Outdoor Power Equipment</a>
             </h4>
             <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet numquam aspernatur eum quasi sapiente nesciunt? Voluptatibus sit, repellat sequi itaque deserunt, dolores in, nesciunt, illum tempora ex quae? Nihil, dolorem!</p>
           </div>
@@ -119,7 +105,7 @@
           <a href="#"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
           <div class="card-body">
             <h4 class="card-title">
-              <a href="#">Project Two</a>
+              <a href="#">Grass Seed</a>
             </h4>
             <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam viverra euismod odio, gravida pellentesque urna varius vitae.</p>
           </div>
@@ -130,7 +116,7 @@
           <a href="#"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
           <div class="card-body">
             <h4 class="card-title">
-              <a href="#">Project Three</a>
+              <a href="#">OX Tools</a>
             </h4>
             <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quos quisquam, error quod sed cumque, odio distinctio velit nostrum temporibus necessitatibus et facere atque iure perspiciatis mollitia recusandae vero vel quam!</p>
           </div>
@@ -141,7 +127,7 @@
           <a href="#"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
           <div class="card-body">
             <h4 class="card-title">
-              <a href="#">Project Four</a>
+              <a href="#">Bits, Blades, Stones, Wheels & Brushes </a>
             </h4>
             <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam viverra euismod odio, gravida pellentesque urna varius vitae.</p>
           </div>
@@ -152,7 +138,7 @@
           <a href="#"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
           <div class="card-body">
             <h4 class="card-title">
-              <a href="#">Project Five</a>
+              <a href="#">Cleats, Nails, Screws & Staples</a>
             </h4>
             <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam viverra euismod odio, gravida pellentesque urna varius vitae.</p>
           </div>
@@ -163,7 +149,7 @@
           <a href="#"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
           <div class="card-body">
             <h4 class="card-title">
-              <a href="#">Project Six</a>
+              <a href="#">Safety Supplies & Personal Protective Equipment</a>
             </h4>
             <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Itaque earum nostrum suscipit ducimus nihil provident, perferendis rem illo, voluptate atque, sit eius in voluptates, nemo repellat fugiat excepturi! Nemo, esse.</p>
           </div>
@@ -172,6 +158,53 @@
     </div>
   </div>
   <!-- /.row -->
+
+  <!-- Rental Equipment Section -->
+  <div class="container-fluid page-section">
+    <h2>Services We Offer</h2>
+
+    <div class="row">
+
+      <div class="col-lg-4 col-sm-6 portfolio-item">
+        <div class="card h-100">
+          <a href="#"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
+          <div class="card-body">
+            <h4 class="card-title">
+              <a href="#">Chainsaw & Garden Tool Sharpening</a>
+            </h4>
+            <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet numquam aspernatur eum quasi sapiente nesciunt? Voluptatibus sit, repellat sequi itaque deserunt, dolores in, nesciunt, illum tempora ex quae? Nihil, dolorem!</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-lg-4 col-sm-6 portfolio-item">
+        <div class="card h-100">
+          <a href="#"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
+          <div class="card-body">
+            <h4 class="card-title">
+              <a href="#">Safety Training</a>
+            </h4>
+            <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet numquam aspernatur eum quasi sapiente nesciunt? Voluptatibus sit, repellat sequi itaque deserunt, dolores in, nesciunt, illum tempora ex quae? Nihil, dolorem!</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-lg-4 col-sm-6 portfolio-item">
+        <div class="card h-100">
+          <a href="#"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
+          <div class="card-body">
+            <h4 class="card-title">
+              <a href="#">Equipment Repair & Maintenance</a>
+            </h4>
+            <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet numquam aspernatur eum quasi sapiente nesciunt? Voluptatibus sit, repellat sequi itaque deserunt, dolores in, nesciunt, illum tempora ex quae? Nihil, dolorem!</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+  <!-- /.row -->
+
 
   <!-- Contact Us Section -->
   <div id="contact" class="container-fluid bg-dark text-light page-section">

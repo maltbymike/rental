@@ -20,7 +20,7 @@
 
   @include('partials.errors')
 
-  <form method="post" action="/product/category/{{ $category->slug }}">
+  <form method="post" action="/product/category/{{ $category->slug }}" enctype="multipart/form-data">
     @method('PATCH')
     @CSRF
 
@@ -66,12 +66,22 @@
     </div>
 
     <div class="form-group row">
-      <label for="inactive" class="col-sm-2 form-check-label {{ $errors->has('inactive') ? 'text-danger' : '' }}">Category is Inactive:</label>
+      <label for="featured[]" class="col-sm-2 form-control-label {{ $errors->has('featured') ? 'text-danger' : '' }}">Featured Months:</label>
       <div class="col-sm-10">
-        <div class="form-check">
-          <input type="hidden" name="inactive" id="inactiveHidden" value="0" />
-          <input type="checkbox" class="form-check-input" name="inactive" id="inactive" value="1" {{ old("inactive", $category->inactive) == '1' ? "checked" : "" }} />
-        </div>
+        <select class="form-control {{ $errors->has('featured') ? 'is-invalid' : '' }}" id="featured[]" name="featured[]" multiple>
+          <option value="1" {{ $category->featured && in_array('1', $category->featured) ? "selected" : "" }}>January</option>
+          <option value="2" {{ $category->featured && in_array('2', $category->featured) ? "selected" : "" }}>February</option>
+          <option value="3" {{ $category->featured && in_array('3', $category->featured) ? "selected" : "" }}>March</option>
+          <option value="4" {{ $category->featured && in_array('4', $category->featured) ? "selected" : "" }}>April</option>
+          <option value="5" {{ $category->featured && in_array('5', $category->featured) ? "selected" : "" }}>May</option>
+          <option value="6" {{ $category->featured && in_array('6', $category->featured) ? "selected" : "" }}>June</option>
+          <option value="7" {{ $category->featured && in_array('7', $category->featured) ? "selected" : "" }}>July</option>
+          <option value="8" {{ $category->featured && in_array('8', $category->featured) ? "selected" : "" }}>August</option>
+          <option value="9" {{ $category->featured && in_array('9', $category->featured) ? "selected" : "" }}>September</option>
+          <option value="10" {{ $category->featured && in_array('10', $category->featured) ? "selected" : "" }}>October</option>
+          <option value="11" {{ $category->featured && in_array('11', $category->featured) ? "selected" : "" }}>November</option>
+          <option value="12" {{ $category->featured && in_array('12', $category->featured) ? "selected" : "" }}>December</option>
+        </select>
       </div>
     </div>
 
@@ -79,6 +89,22 @@
       <label for="image" class="col-sm-2 form-control-label {{ $errors->has('image') ? 'text-danger' : '' }}">Image:</label>
       <div class="col-sm-4">
         <input type="file" class="form-control {{ $errors->has('image') ? 'is-invalid' : '' }}" id="image" name="image" multiple />
+      </div>
+
+      @if($image)
+      <div class="col-xl-1 col-sm-2 col-3">
+        <img class="d-block w-100 border" src="{{ asset('/storage/images/' . $image->filename) }}" alt="Image of {{ $category->name }}" />
+      </div>
+      @endif
+    </div>
+
+    <div class="form-group row">
+      <label for="inactive" class="col-sm-2 form-check-label {{ $errors->has('inactive') ? 'text-danger' : '' }}">Category is Inactive:</label>
+      <div class="col-sm-10">
+        <div class="form-check">
+          <input type="hidden" name="inactive" id="inactiveHidden" value="0" />
+          <input type="checkbox" class="form-check-input" name="inactive" id="inactive" value="1" {{ old("inactive", $category->inactive) == '1' ? "checked" : "" }} />
+        </div>
       </div>
     </div>
 

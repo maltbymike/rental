@@ -12,6 +12,10 @@ class ProductCategory extends Model
     protected $dates = ['deleted_at'];
     protected $guarded = [];
 
+    protected $casts = [
+      'featured' => 'array',
+    ];
+
     public function getRouteKeyName()
     {
       return 'slug';
@@ -30,6 +34,11 @@ class ProductCategory extends Model
     public function activeChildren()
     {
       return $this->hasMany(ProductCategory::class, 'parent_id')->where('inactive', '0');
+    }
+
+    public function image()
+    {
+      return $this->belongsTo(Image::class);
     }
 
     public function products()

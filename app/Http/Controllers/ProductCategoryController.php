@@ -2,7 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Image;
+use App\ImageType;
 use App\ProductCategory;
+
+use App\Http\Requests\ProductCategoryRequest;
+
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -57,14 +62,31 @@ class ProductCategoryController extends Controller
     public function edit(ProductCategory $category)
     {
         $categories = $this->getCategoryDataForSelectOption();
+        $image = $category->image()->first();
 
-        return view('product.category.edit', compact('categories', 'category'));
+        return view('product.category.edit', compact('categories', 'category', 'image'));
     }
 
-    public function update(Request $request, ProductCategory $category)
+    public function update(ProductCategoryRequest $request, ProductCategory $category)
     {
-        $attributes = $this->validateCategory();
+        $attributes = $this->getAttributes();
         $category->update($attributes);
+
+        // upload images
+        if (request()->hasFIle('image'))
+        {
+          $type = ImageType::where('slug', 'category')->first();
+
+          $filename = request()->file('image')->store('category', 'images');
+
+          $imageStored = new Image;
+          $imageStored->filename = $filename;
+          $imageStored->type()->associate($type);
+          $imageStored->save();
+
+          $category->image()->associate($imageStored);
+          $category->save();
+        }
 
         session()->flash('status', "Category: {$attributes['name']} was updated!");
         return redirect('/product/category');
@@ -75,6 +97,21 @@ class ProductCategoryController extends Controller
         $category->delete();
 
         return redirect('/product/category');
+    }
+
+    public function getAttributes()
+    {
+      $attributes = [
+        'description' => request('description'),
+        'featured' => request('featured'),
+        'inactive' => request('inactive'),
+        'name' => request('name'),
+        'parent_id' => request('parent_id'),
+        'por_id' => request('por_id'),
+        'slug' => request('slug'),
+      ];
+
+      return $attributes;
     }
 
     public function validateCategory()
