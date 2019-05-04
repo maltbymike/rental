@@ -9,36 +9,6 @@
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <!-- Left Side Of Navbar -->
       <ul class="navbar-nav mr-auto">
-        @auth
-          <li class="nav-item">
-              <a class="nav-link font-weight-bold" href="/webadmin">Admin Home</a>
-          </li>
-
-          <li class="nav-item dropdown">
-              <a id="navbarDropdown" class="nav-link dropdown-toggle font-weight-bold" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                  Inventory<span class="caret"></span>
-              </a>
-
-              <div class="dropdown-menu dropdown-menu-left" aria-labelledby="navbarDropdown">
-                  <a class="dropdown-item" href="/product/category">View Products</a>
-                  <div class="dropdown-divider"></div>
-                  <a class="dropdown-item" href="/product/create">Add New Product</a>
-                  <a class="dropdown-item" href="/product/category/create">Add New Product Categories</a>
-                  <div class="dropdown-divider"></div>
-                  <a class="dropdown-item" href="/product/upload">Upload Products from CSV</a>
-              </div>
-          </li>
-
-          <li class="nav-item dropdown">
-              <a id="navbarDropdown" class="nav-link dropdown-toggle font-weight-bold" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                  Options <span class="caret"></span>
-              </a>
-
-              <div class="dropdown-menu dropdown-menu-left" aria-labelledby="navbarDropdown">
-                  <a class="dropdown-item" href="/settings/homepage">Homepage Options</a>
-              </div>
-          </li>
-        @endauth
 
         <li class="nav-item">
             <a class="nav-link font-weight-bold" href="/product/category">Rental Equipment</a>
@@ -52,6 +22,38 @@
 
       <!-- Right Side Of Navbar -->
       <ul class="navbar-nav ml-auto">
+
+        @auth
+        <li class="nav-item">
+          <a class="nav-link font-weight-bold" href="/webadmin">Admin Home</a>
+        </li>
+
+        <li class="nav-item dropdown">
+          <a id="navbarDropdown" class="nav-link dropdown-toggle font-weight-bold" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+            Inventory<span class="caret"></span>
+          </a>
+
+          <div class="dropdown-menu dropdown-menu-left" aria-labelledby="navbarDropdown">
+            <a class="dropdown-item" href="/product/category">View Products</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="/product/create">Add New Product</a>
+            <a class="dropdown-item" href="/product/category/create">Add New Product Categories</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="/product/upload">Upload Products from CSV</a>
+          </div>
+        </li>
+
+        <li class="nav-item dropdown">
+          <a id="navbarDropdown" class="nav-link dropdown-toggle font-weight-bold" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+            Options <span class="caret"></span>
+          </a>
+
+          <div class="dropdown-menu dropdown-menu-left" aria-labelledby="navbarDropdown">
+            <a class="dropdown-item" href="/settings/homepage">Homepage Options</a>
+          </div>
+        </li>
+        @endauth
+
           <!-- Authentication Links -->
           @guest
               <li class="nav-item">

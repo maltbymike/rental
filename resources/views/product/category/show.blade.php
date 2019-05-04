@@ -30,8 +30,8 @@
   <table class="table table-striped">
     <thead>
       <tr>
-        <th colspan="4"></th>
-        <th colspan="2" class="text-center table-dark pb-0 d-none d-md-table-cell" style="border-bottom:0">Weekend</th>
+        <th colspan="4" class="table-dark">Rental Equipment</th>
+        <th colspan="2" class="text-center table-dark d-none d-md-table-cell">Weekend</th>
       </tr>
       <tr>
         <th scope="col" class="table-dark" style="width:40%"></th>
@@ -54,7 +54,7 @@
         <td class="text-center d-none d-sm-table-cell">{{ $product->rates->firstWhere('hours', ">=", env('4_HOURS')) ? $product->rates->firstWhere('hours', ">=", env('4_HOURS'))->rate : "---" }}</td>
         <td class="text-center table-dark">{{ $product->rates->firstWhere('hours', ">=", env('DAY_HOURS')) ? $product->rates->firstWhere('hours', ">=", env('DAY_HOURS'))->rate : "---" }}</td>
         <td class="text-center d-none d-sm-table-cell">{{ $product->rates->firstWhere('hours', ">=", env('WEEK_HOURS')) ? $product->rates->firstWhere('hours', ">=", env('WEEK_HOURS'))->rate : "---" }}</td>
-        <td class="text-center table-primary d-none d-md-table-cell">
+        <td class="text-center d-none d-md-table-cell">
           @if ($product->rates->where('hours', env('DAY_HOURS'))->first())
             {{ number_format($product->rates->where('hours', env('DAY_HOURS'))->first()->rate * 1.5, 2) }}
           @elseif ($product->rates->firstWhere('hours', ">=", env('WEEK_HOURS')))
@@ -63,7 +63,7 @@
             ---
           @endif
         </td>
-        <td class="text-center table-primary d-none d-md-table-cell">{{ $product->rates->firstWhere('hours', ">=", env('DAY_HOURS')) ? $product->rates->firstWhere('hours', ">=", env('DAY_HOURS'))->rate : "---" }}</td>
+        <td class="text-center d-none d-md-table-cell">{{ $product->rates->firstWhere('hours', ">=", env('DAY_HOURS')) ? $product->rates->firstWhere('hours', ">=", env('DAY_HOURS'))->rate : "---" }}</td>
         @if ($loggedIn)
           <td><a href="/product/{{ $product->slug }}/edit" class="btn btn-primary btn-sm">EDIT</a></td>
         @endif
@@ -78,8 +78,12 @@
       <a href="/product/category/{{ $subcategory->slug }}">
         <div class="card">
           <div class='card-header'>{{ $subcategory->name }}</div>
-          <img class="card-img-top" src="https://via.placeholder.com/350x200" />
 
+          @if($subcategory->image_id)
+            <img class="card-img-top" src="/storage/images/{{ $subcategory->image()->value('filename') }}" />
+          @else
+            <img class="card-img-top" src="https://via.placeholder.com/350x200" />
+          @endif
         </div>
       </a>
     </div>

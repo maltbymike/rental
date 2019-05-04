@@ -62,5 +62,5 @@ class ProductCategory extends Model
         ->with('rates')
         ->withTimestamps();
     }
-
+    
 }
