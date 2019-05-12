@@ -26,6 +26,24 @@
   <div class="row">
       <span>{{ $category->description }}</span>
   </div>
+  
+  <div class="row">
+    @foreach($subcategories as $subcategory)
+    <div class="col-lg-3 col-md-4 col-sm-6 mb-4 mt-4">
+      <a href="/product/category/{{ $subcategory->slug }}">
+        <div class="card">
+          <div class='card-header'>{{ $subcategory->name }}</div>
+
+          @if($subcategory->image_id)
+          <img class="card-img-top" src="/storage/images/{{ $subcategory->image()->value('filename') }}" />
+          @else
+          <img class="card-img-top" src="https://via.placeholder.com/350x200" />
+          @endif
+        </div>
+      </a>
+    </div>
+    @endforeach
+  </div>
 
   <table class="table table-striped">
     <thead>
@@ -71,23 +89,5 @@
       @endforeach
     </tbody>
   </table>
-
-  <div class="row">
-    @foreach($subcategories as $subcategory)
-    <div class="col-lg-3 col-md-4 col-sm-6 mb-4 mt-4">
-      <a href="/product/category/{{ $subcategory->slug }}">
-        <div class="card">
-          <div class='card-header'>{{ $subcategory->name }}</div>
-
-          @if($subcategory->image_id)
-            <img class="card-img-top" src="/storage/images/{{ $subcategory->image()->value('filename') }}" />
-          @else
-            <img class="card-img-top" src="https://via.placeholder.com/350x200" />
-          @endif
-        </div>
-      </a>
-    </div>
-    @endforeach
-  </div>
 
 @endsection

@@ -26,3 +26,21 @@ body {
 .portfolio-item {
   margin-bottom: 30px;
 }
+
+.featured-categories {
+  overflow-x: auto;
+  overflow-y: hidden;
+  white-space: nowrap;
+}
+
+.featured-categories .row {
+  display: block;
+}
+.featured-categories .row .card {
+  display: inline-block;
+  float: none;
+}
+
+.featured-categories .row .card-body {
+  white-space: normal;
+}
