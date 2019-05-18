@@ -60,10 +60,10 @@
   </div>
 
   <!-- Rental Equipment Section -->
-  <div class="container-fluid featured-categories">
+  <div class="container-fluid featured-categories text-center">
     <h2>Featured Equipment</h2>
 
-    <div class="row text-center">
+    <div class="row">
       @foreach($featured_categories as $key => $value)
         <div class="card col-lg-3 col-sm-4 col-6">
           <!-- <div class="h-100 text-center"> -->
@@ -127,7 +127,7 @@
           <a href="#"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
           <div class="card-body">
             <h4 class="card-title">
-              <a href="#">Bits, Blades, Stones, Wheels & Brushes </a>
+              <a href="#">Honda Engines</a>
             </h4>
             <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam viverra euismod odio, gravida pellentesque urna varius vitae.</p>
           </div>
@@ -138,7 +138,7 @@
           <a href="#"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
           <div class="card-body">
             <h4 class="card-title">
-              <a href="#">Cleats, Nails, Screws & Staples</a>
+              <a href="#">Bits, Blades, Cleats, Nails, Screws, Staples, Stones & Wheels</a>
             </h4>
             <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam viverra euismod odio, gravida pellentesque urna varius vitae.</p>
           </div>

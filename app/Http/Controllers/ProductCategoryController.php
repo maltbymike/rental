@@ -22,11 +22,11 @@ class ProductCategoryController extends Controller
     {
         if ($loggedIn = Auth::check())
         {
-          $categories = ProductCategory::all();
+          $categories = ProductCategory::orderBy('name')->get();
         }
         else
         {
-          $categories = ProductCategory::where('inactive', 0)->get();
+          $categories = ProductCategory::where('inactive', 0)->orderBy('name')->get();
         }
 
         return view('product.category.index', compact('categories', 'loggedIn'));
