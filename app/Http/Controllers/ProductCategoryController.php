@@ -20,17 +20,15 @@ class ProductCategoryController extends Controller
 
     public function index()
     {
-        if ($loggedIn = Auth::check())
-        {
-          $categories = ProductCategory::orderBy('name')->get();
-        }
-        else
-        {
-          $categories = ProductCategory::where('inactive', 0)->orderBy('name')->get();
-        }
+      $categories = ProductCategory::where('inactive', 0)->orderBy('name')->get();
+      return view('product.category.index', compact('categories'));
+    }
 
-        return view('product.category.index', compact('categories', 'loggedIn'));
-
+    public function indexWtihInactive()
+    {
+      $withInactive = TRUE;
+      $categories = ProductCategory::orderBy('name')->get();
+      return view('product.category.index', compact('categories', '$withInactive'));
     }
 
     public function create()

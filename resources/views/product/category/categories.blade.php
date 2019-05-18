@@ -7,7 +7,7 @@
     @endif
   </a>
 
-  @if ($loggedIn)
+  @if (Auth::check())
     <a href="/product/category/{{ $category->slug }}/edit" class="btn btn-primary btn-sm">EDIT</a>
   @endif
 
@@ -15,7 +15,7 @@
 
 @if ($category->children()->count() > 0)
 
-  @if ($loggedIn)
+  @if (isset($withInactive))
     <?php $categories = $category->children; ?>
   @else
     <?php $categories = $category->activeChildren; ?>
