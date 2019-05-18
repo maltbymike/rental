@@ -8,7 +8,7 @@
 <div class="d-flex justify-content-between align-items-center">
   <span>{{ $category->name }}</span>
 
-  @if ($loggedIn)
+  @if (Auth::check())
     <a href="/product/category/{{ $category->slug }}/edit" class="btn btn-primary btn-sm">EDIT</a>
   @endif
 </div>
@@ -26,7 +26,7 @@
   <div class="row">
       <span>{{ $category->description }}</span>
   </div>
-  
+
   <div class="row">
     @foreach($subcategories as $subcategory)
     <div class="col-lg-3 col-md-4 col-sm-6 mb-4 mt-4">
@@ -58,7 +58,7 @@
         <th scope="col" class="text-center table-dark d-none d-sm-table-cell" style="width:12%">Weekly</th>
         <th scope="col" class="text-center table-dark d-none d-md-table-cell" style="width:12%; border-top:0">Out Friday after 4pm</th>
         <th scope="col" class="text-center table-dark d-none d-md-table-cell" style="width:12%; border-top:0">Out Saturday</th>
-        @if ($loggedIn)
+        @if (Auth::check())
           <td></td>
         @endif
       </tr>
@@ -82,7 +82,7 @@
           @endif
         </td>
         <td class="text-center d-none d-md-table-cell">{{ $product->rates->firstWhere('hours', ">=", env('DAY_HOURS')) ? $product->rates->firstWhere('hours', ">=", env('DAY_HOURS'))->rate : "---" }}</td>
-        @if ($loggedIn)
+        @if (Auth::check())
           <td><a href="/product/{{ $product->slug }}/edit" class="btn btn-primary btn-sm">EDIT</a></td>
         @endif
       </tr>
