@@ -61,20 +61,20 @@
 
   <!-- Rental Equipment Section -->
   <div class="container-fluid featured-categories text-center">
-    <h2>Featured Equipment</h2>
+    <h2>Whatever The Job - We have the Equipment!</h2>
 
     <div class="row">
-      @foreach($featured_categories as $key => $value)
+      @foreach($categories as $category)
         <div class="card col-lg-3 col-sm-4 col-6">
           <!-- <div class="h-100 text-center"> -->
-            <a href="/product/category/{{ $categories->firstWhere('id', $key)->slug }}">
-              <img class="card-img-top " src="/storage/images/{{ $categories->firstWhere('id', $key)->image()->value('filename') }}" alt="">
+            <a href="/product/category/{{ $category->slug }}">
+              <img class="card-img-top " src="/storage/images/{{ $category->image()->value('filename') }}" alt="">
             </a>
             <div class="card-body">
               <h4 class="card-title">
-                <a href="/product/category/{{ $categories->firstWhere('id', $key)->slug }}">{{ $categories->firstWhere('id', $key)->name }}</a>
+                <a href="/product/category/{{ $category->slug }}">{{ $category->name }}</a>
               </h4>
-              <p class="card-text">{{ $categories->firstWhere('id', $key)->description }}</p>
+              <p class="card-text">{{ $category->description }}</p>
             </div>
           <!-- </div> -->
         </div>
