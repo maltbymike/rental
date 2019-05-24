@@ -27,20 +27,20 @@ body {
   margin-bottom: 30px;
 }
 
-.featured-categories {
+.categories-slider {
   overflow-x: auto;
   overflow-y: hidden;
   white-space: nowrap;
 }
 
-.featured-categories .row {
+.categories-slider .row {
   display: block;
 }
-.featured-categories .row .card {
+.categories-slider .row .card {
   display: inline-block;
   float: none;
 }
 
-.featured-categories .row .card-body {
+.categories-slider .row .card-body {
   white-space: normal;
 }
