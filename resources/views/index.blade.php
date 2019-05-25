@@ -65,7 +65,7 @@
 
     <div class="row">
       @foreach($categories as $category)
-        <div class="card col-lg-3 col-sm-4 col-6">
+        <div class="card col-lg-3 col-md-4 col-sm-6 col-12">
           <div class="h-100 text-center">
             <a href="/product/category/{{ $category->slug }}">
               <img class="card-img-top " src="/storage/images/{{ $category->image()->value('filename') }}" alt="">
