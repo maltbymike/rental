@@ -45,3 +45,9 @@ body {
 .categories-slider .card-group .card-body {
   white-space: normal;
 }
+
+.category-thumb {
+  width: 100%;
+  height: 200px;
+  object-fit: contain;
+}

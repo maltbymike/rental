@@ -34,9 +34,9 @@
         <div class="card">
           <div class='card-header'>{{ $subcategory->name }}</div>
           @if($subcategory->getFirstMediaUrl('category_images'))
-          <img class="card-img-top" src="{{ $subcategory->getFirstMediaUrl('category_images', 'thumb') }}" />
+          <img class="category-thumb card-img-top" src="{{ $subcategory->getFirstMediaUrl('category_images', 'thumb') }}" />
           @else
-          <img class="card-img-top" src="https://via.placeholder.com/350x200" />
+          <img class="category-thumb card-img-top" src="https://via.placeholder.com/350x200" />
           @endif
         </div>
       </a>

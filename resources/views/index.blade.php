@@ -68,7 +68,8 @@
         @foreach($categories as $category)
           <div class="col-lg-3 col-md-4 col-sm-6 col-12 card border-0">
             <a href="/product/category/{{ $category->slug }}">
-              <img class="card-img-top" src="/storage/images/{{ $category->image()->value('filename') }}" alt="">
+              <!-- <img class="card-img-top" src="/storage/images/{{ $category->image()->value('filename') }}" alt=""> -->
+              <img class="category-thumb card-img-top" src="{{ $category->getFirstMediaUrl('category_images', 'thumb') }}" alt="">
             </a>
             <h5 class="card-footer">
               <a href="/product/category/{{ $category->slug }}">{{ $category->name }}</a>

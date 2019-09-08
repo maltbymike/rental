@@ -42,11 +42,11 @@ class ProductCategory extends Model implements HasMedia
       return $this->hasMany(ProductCategory::class, 'parent_id')->where('inactive', '0');
     }
 
-    // public function image()
-    // {
-    //   return $this->belongsTo(Image::class);
-    // }
-    //
+    public function image()
+    {
+      return $this->belongsTo(Image::class);
+    }
+
     public function products()
     {
       return $this->belongsToMany(Product::class)
