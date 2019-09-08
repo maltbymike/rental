@@ -8,7 +8,7 @@
 
   @include('partials.errors')
 
-  <form method="post" action="/product/category">
+  <form method="post" action="/product/category" enctype="multipart/form-data">
 
     @CSRF
 
@@ -61,6 +61,13 @@
           <input type="hidden" name="inactive" id="inactiveHidden" value="0" />
           <input type="checkbox" class="form-check-input" name="inactive" id="inactive" {{ old("inactive") == TRUE ? "checked" : "" }} />
         </div>
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <label for="image" class="col-sm-2 form-control-label {{ $errors->has('image') ? 'text-danger' : '' }}">Image:</label>
+      <div class="col-sm-4">
+        <input type="file" class="form-control {{ $errors->has('image') ? 'is-invalid' : '' }}" id="image" name="image" multiple />
       </div>
     </div>
 

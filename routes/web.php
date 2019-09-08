@@ -15,6 +15,8 @@ Auth::routes();
 
 Route::get('/', 'HomepageController@index');
 
+Route::resource('image', 'ImageController');
+
 Route::get('product/category/with-inactive', 'ProductCategoryController@indexWtihInactive');
 Route::resource('product/category', 'ProductCategoryController');
 Route::get('product/upload', 'ProductController@upload');

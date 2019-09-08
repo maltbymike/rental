@@ -91,11 +91,11 @@
         <input type="file" class="form-control {{ $errors->has('image') ? 'is-invalid' : '' }}" id="image" name="image" multiple />
       </div>
 
-      @if($image)
+      @foreach($images as $image)
       <div class="col-xl-1 col-sm-2 col-3">
-        <img class="d-block w-100 border" src="{{ asset('/storage/images/' . $image->filename) }}" alt="Image of {{ $category->name }}" />
+        <img class="d-block w-100 border" src="{{ $image->getUrl('thumb') }}" alt="Image of {{ $category->name }}" />
       </div>
-      @endif
+      @endforeach
     </div>
 
     <div class="form-group row">

@@ -38,13 +38,21 @@ class ProductCategoryController extends Controller
         return view('product.category.create', compact('categories'));
     }
 
-    public function store()
+    public function store(Request $request)
     {
         $attributes = $this->validateCategory();
-        $category = ProductCategory::create($attributes);
+        $category = new ProductCategory($attributes);
+
+        $category->save();
+
+        // Store Images
+        if($request->hasFile('image') && $request->file('image')->isValid())
+        {
+          $category->addMediaFromRequest('image')->toMediaCollection('category_images');
+        }
 
         session()->flash('status', "Category: <b>{$attributes['name']}</b> was created successfully!");
-        return redirect('/product/category');
+        return redirect("/product/category/{$category->slug}/edit");
     }
 
     public function show(ProductCategory $category)
@@ -58,9 +66,9 @@ class ProductCategoryController extends Controller
     public function edit(ProductCategory $category)
     {
         $categories = $this->getCategoryDataForSelectOption();
-        $image = $category->image()->first();
+        $images = $category->getMedia('category_images');
 
-        return view('product.category.edit', compact('categories', 'category', 'image'));
+        return view('product.category.edit', compact('categories', 'category', 'images'));
     }
 
     public function update(ProductCategoryRequest $request, ProductCategory $category)
@@ -69,23 +77,13 @@ class ProductCategoryController extends Controller
         $category->update($attributes);
 
         // upload images
-        if (request()->hasFIle('image'))
+        if (request()->hasFIle('image') && request()->file('image')->isValid())
         {
-          $type = ImageType::where('slug', 'category')->first();
-
-          $filename = request()->file('image')->store('category', 'images');
-
-          $imageStored = new Image;
-          $imageStored->filename = $filename;
-          $imageStored->type()->associate($type);
-          $imageStored->save();
-
-          $category->image()->associate($imageStored);
-          $category->save();
+          $category->addMediaFromRequest('image')->toMediaCollection('category_images');
         }
 
         session()->flash('status', "Category: {$attributes['name']} was updated!");
-        return redirect('/product/category');
+        return redirect("/product/category/{$category->slug}");
     }
 
     public function destroy(ProductCategory $category)

@@ -60,26 +60,22 @@
   </div>
 
   <!-- Rental Equipment Section -->
-  <div class="container-fluid categories-slider text-center">
-    <h2>Whatever The Job - We have the Equipment!</h2>
+  <div class="container-fluid page-section">
+    <h2 class="text-center pb-4">Whatever Your Job - We Have The Equipment!</h2>
 
-    <div class="row">
-      @foreach($categories as $category)
-        <div class="card col-lg-3 col-md-4 col-sm-6 col-12">
-          <div class="h-100 text-center">
+    <div class="categories-slider">
+      <div class="card-group text-center">
+        @foreach($categories as $category)
+          <div class="col-lg-3 col-md-4 col-sm-6 col-12 card border-0">
             <a href="/product/category/{{ $category->slug }}">
-              <img class="card-img-top " src="/storage/images/{{ $category->image()->value('filename') }}" alt="">
+              <img class="card-img-top" src="/storage/images/{{ $category->image()->value('filename') }}" alt="">
             </a>
-            <div class="card-body">
-              <h4 class="card-title">
-                <a href="/product/category/{{ $category->slug }}">{{ $category->name }}</a>
-              </h4>
-              <p class="card-text">{{ $category->description }}</p>
-            </div>
+            <h5 class="card-footer">
+              <a href="/product/category/{{ $category->slug }}">{{ $category->name }}</a>
+            </h5>
           </div>
-        </div>
-      @endforeach
-
+        @endforeach
+      </div>
     </div>
   </div>
   <!-- /.row -->

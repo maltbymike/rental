@@ -7,8 +7,14 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use App\ProductCategory;
 use App\Product;
 
-class ProductCategory extends Model
+use Spatie\MediaLibrary\Models\Media;
+use Spatie\MediaLibrary\HasMedia\HasMedia;
+use Spatie\MediaLibrary\HasMedia\HasMediaTrait;
+
+class ProductCategory extends Model implements HasMedia
 {
+    use HasMediaTrait;
+
     protected $dates = ['deleted_at'];
     protected $guarded = [];
 
@@ -36,11 +42,11 @@ class ProductCategory extends Model
       return $this->hasMany(ProductCategory::class, 'parent_id')->where('inactive', '0');
     }
 
-    public function image()
-    {
-      return $this->belongsTo(Image::class);
-    }
-
+    // public function image()
+    // {
+    //   return $this->belongsTo(Image::class);
+    // }
+    //
     public function products()
     {
       return $this->belongsToMany(Product::class)
@@ -62,5 +68,13 @@ class ProductCategory extends Model
         ->with('rates')
         ->withTimestamps();
     }
-    
+
+    public function registerMediaConversions(Media $media = null)
+    {
+      $this->addMediaConversion('thumb')
+            ->width(350)
+            ->height(200)
+            ->sharpen(10);
+    }
+
 }

@@ -33,9 +33,8 @@
       <a href="/product/category/{{ $subcategory->slug }}">
         <div class="card">
           <div class='card-header'>{{ $subcategory->name }}</div>
-
-          @if($subcategory->image_id)
-          <img class="card-img-top" src="/storage/images/{{ $subcategory->image()->value('filename') }}" />
+          @if($subcategory->getFirstMediaUrl('category_images'))
+          <img class="card-img-top" src="{{ $subcategory->getFirstMediaUrl('category_images', 'thumb') }}" />
           @else
           <img class="card-img-top" src="https://via.placeholder.com/350x200" />
           @endif

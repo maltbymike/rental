@@ -33,14 +33,15 @@ body {
   white-space: nowrap;
 }
 
-.categories-slider .row {
+.categories-slider .card-group {
   display: block;
 }
-.categories-slider .row .card {
+
+.categories-slider .card-group .card {
   display: inline-block;
   float: none;
 }
 
-.categories-slider .row .card-body {
+.categories-slider .card-group .card-body {
   white-space: normal;
 }
